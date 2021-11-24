@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Title22" parent="TextAppearance.AppCompat">
+        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Title18" parent="TextAppearance.AppCompat">
+        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="BodyBold" parent="TextAppearance.AppCompat">
+        <item name="font">@font/sf_pro_display_semibold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">15sp</item>
+        <item name="lineHeight">22.5sp</item>
+    </style>
+
+    <style name="BodyRegular" parent="TextAppearance.AppCompat">
+        <item name="font">@font/sf_pro_display_regular</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">15sp</item>
+        <item name="lineHeight">22.5sp</item>
+    </style>
+
+    <style name="Subtitle" parent="TextAppearance.AppCompat">
+        <item name="font">@font/sf_pro_display_light</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.AppCompat">
+        <item name="font">@font/sf_pro_display_regular</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+</resources>
