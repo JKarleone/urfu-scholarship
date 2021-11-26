@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">scholarship</string>
+
+    <string name="title_welcome">Добро пожаловать!</string>
+    <string name="title_personal_data">Личные данные</string>
+    <string name="title_create_account">Создать аккаунт</string>
+
+    <string name="subtitle_sign_in_to_continue">Ввойдите в аккаунт, чтобы продолжить</string>
+    <string name="subtitle_personal_data">Заполните личные данные</string>
+    <string name="subtitle_create_account">Введите email и придумайте пароль</string>
+
+    <string name="hint_email">Ваша почта</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_password_repeat">Введите пароль повторно</string>
+    <string name="hint_full_name">ФИО</string>
+    <string name="hint_academic_group_number">Номер академической группы</string>
+    <string name="hint_speciality_name">Наименование специальности</string>
+    <string name="hint_phone_number">Номер телефона</string>
+
+    <string name="placeholder_email">email@email.com</string>
+    <string name="placeholder_password">••••••••</string>
+    <string name="placeholder_full_name">Иванов Иван Иванович</string>
+    <string name="placeholder_academic_group_number">Например, РИ-110012</string>
+    <string name="placeholder_speciality_name">Например, Программная инженерия</string>
+    <string name="placeholder_phone_number">+7 (9__) ___-__-__</string>
+
+    <string name="sign_in">Войти в аккаунт</string>
+    <string name="forget_password_text">Забыли пароль?</string>
+    <string name="sign_up_text">Ещё нет аккаунта? Зарегистрируйтесь</string>
+    <string name="already_signed_up_text">Уже зарегистрированы? Войти в аккаунт</string>
+    <string name="next_step">Следующий шаг</string>
+    <string name="forget_password_congrats">Вы забыли пароль! Поздравляю!</string>
+    <string name="agreement_to_terms_of_personal_data">Я согласен с условиями обработки персональных данных</string>
+    <string name="feature_will_be_soon">Функционал скоро появится, следите за обновлениями!</string>
+    <string name="signup">Зарегистрироваться</string>
+    <string name="successful_registration">Вы успешно зарегистрировались!</string>
 </resources>

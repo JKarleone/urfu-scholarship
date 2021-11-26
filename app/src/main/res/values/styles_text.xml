@@ -38,4 +38,39 @@
         <item name="fontWeight">600</item>
         <item name="android:textSize">13sp</item>
     </style>
+
+    <style name="ClickableText" parent="BodyRegular">
+        <item name="android:textColor">@color/primary_blue</item>
+        <item name="fontWeight">400</item>
+    </style>
+
+    <style name="PlaceholderText" parent="BodyRegular">
+        <item name="android:textColor">@color/secondary_gray</item>
+        <item name="fontWeight">400</item>
+    </style>
+
+    <style name="HintText" parent="Subtitle">
+        <item name="android:textColor">@color/primary_dark_text</item>
+    </style>
+
+    <style name="ButtonText" parent="BodyBold">
+        <item name="android:textColor">@color/primary_white</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="TitleH1" parent="Title22">
+        <item name="android:textColor">@color/primary_dark_text</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="SubtitleH1Gray" parent="BodyRegular">
+        <item name="android:textColor">@color/secondary_gray_text</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="SubtitleH1Dark" parent="BodyRegular">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primary_dark_text</item>
+    </style>
 </resources>

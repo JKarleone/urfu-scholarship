@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="ru.intelligency.scholarship.presentation.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_registrationPart1Fragment"
+            app:destination="@id/registrationPart1Fragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationPart1Fragment"
+        android:name="ru.intelligency.scholarship.presentation.SignUpPart1Fragment"
+        android:label="fragment_registration_part1"
+        tools:layout="@layout/fragment_sign_up_part1" >
+        <action
+            android:id="@+id/action_registrationPart1Fragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_registrationPart1Fragment_to_registrationPart2Fragment"
+            app:destination="@id/registrationPart2Fragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationPart2Fragment"
+        android:name="ru.intelligency.scholarship.presentation.SignUpPart2Fragment"
+        android:label="fragment_registration_part2"
+        tools:layout="@layout/fragment_sign_up_part2" >
+        <action
+            android:id="@+id/action_registrationPart2Fragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+</navigation>

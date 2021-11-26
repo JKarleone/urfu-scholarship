@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="boxBackgroundColor">@color/secondary_gray_background</item>
+        <item name="boxStrokeErrorColor">@color/secondary_red</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="android:textAppearance">@style/BodyRegular</item>
+        <item name="placeholderTextAppearance">@style/PlaceholderText</item>
+        <item name="hintEnabled">false</item>
+    </style>
+</resources>
