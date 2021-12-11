@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_portfolio">
+
+    <fragment
+        android:id="@+id/navigation_portfolio"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.PortfolioFragment"
+        android:label="@string/portfolio"
+        tools:layout="@layout/fragment_portfolio" />
+
+    <fragment
+        android:id="@+id/navigation_my_applications"
+        android:name="ru.intelligency.scholarship.presentation.ui.myapplications.MyApplicationsFragment"
+        android:label="@string/my_applications"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="ru.intelligency.scholarship.presentation.ui.notifications.NotificationsFragment"
+        android:label="@string/notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="ru.intelligency.scholarship.presentation.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

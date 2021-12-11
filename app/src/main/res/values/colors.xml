@@ -19,4 +19,5 @@
     <color name="secondary_gray_button_off">#EDEDED</color>
     <color name="secondary_gray_background">#F7F8FA</color>
     <color name="secondary_gray_stroke">#E3E6EA</color>
+    <color name="main_background_color">#FAFAFA</color>
 </resources>

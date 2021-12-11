@@ -1,4 +1,4 @@
-package ru.intelligency.scholarship.presentation
+package ru.intelligency.scholarship.presentation.entrance
 
 import android.os.Bundle
 import android.view.View

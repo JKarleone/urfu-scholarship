@@ -34,4 +34,22 @@
     <string name="feature_will_be_soon">Функционал скоро появится, следите за обновлениями!</string>
     <string name="signup">Зарегистрироваться</string>
     <string name="successful_registration">Вы успешно зарегистрировались!</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="portfolio">Портфолио</string>
+    <string name="my_applications">Мои заявки</string>
+    <string name="notifications">Уведомления</string>
+    <string name="profile">Профиль</string>
+
+    <string name="portfolio_profile_expiration_date">Действителен до: %1$s</string>
 </resources>

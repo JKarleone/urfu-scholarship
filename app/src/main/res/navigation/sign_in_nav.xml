@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="ru.intelligency.scholarship.presentation.SignInFragment"
+        android:name="ru.intelligency.scholarship.presentation.entrance.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationPart1Fragment"
-        android:name="ru.intelligency.scholarship.presentation.SignUpPart1Fragment"
+        android:name="ru.intelligency.scholarship.presentation.entrance.SignUpPart1Fragment"
         android:label="fragment_registration_part1"
         tools:layout="@layout/fragment_sign_up_part1" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationPart2Fragment"
-        android:name="ru.intelligency.scholarship.presentation.SignUpPart2Fragment"
+        android:name="ru.intelligency.scholarship.presentation.entrance.SignUpPart2Fragment"
         android:label="fragment_registration_part2"
         tools:layout="@layout/fragment_sign_up_part2" >
         <action
