@@ -1,6 +1,7 @@
 package ru.intelligency.scholarship.presentation.ui.portfolio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.intelligency.scholarship.R
@@ -18,6 +19,13 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupRecyclerView()
+        binding.addButton.setOnClickListener {
+            addButtonClicked()
+        }
+    }
+
+    private fun setupRecyclerView() {
         val documents = listOf(
             PortfolioDocument(
                 0,
@@ -36,5 +44,9 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>() {
         )
         binding.documentsRecyclerView.adapter = DocumentsAdapter(documents)
         binding.documentsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun addButtonClicked() {
+        Log.d("PortfolioFragment", "Button Clicked!")
     }
 }
