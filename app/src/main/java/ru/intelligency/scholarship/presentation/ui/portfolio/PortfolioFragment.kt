@@ -12,7 +12,8 @@ import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocu
 import ru.intelligency.scholarship.presentation.utils.DocumentStatus
 import java.util.*
 
-class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>() {
+class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
+    DocumentsAdapter.OnDocumentItemClickListener {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_portfolio
@@ -42,11 +43,20 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>() {
                 Date()
             ),
         )
-        binding.documentsRecyclerView.adapter = DocumentsAdapter(documents)
+        binding.documentsRecyclerView.adapter = DocumentsAdapter(documents, this)
         binding.documentsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun addButtonClicked() {
-        Log.d("PortfolioFragment", "Button Clicked!")
+        Log.d(TAG, "Button Clicked!")
+    }
+
+    override fun onDocumentItemClick(document: PortfolioDocument) {
+        Log.d(TAG, "Document clicked!\n$document")
+    }
+
+    companion object {
+
+        private const val TAG = "PortfolioFragment"
     }
 }

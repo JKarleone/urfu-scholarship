@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DocumentsAdapter(
-    private var documents: List<PortfolioDocument>
+    private var documents: List<PortfolioDocument>,
+    private val clickListener: OnDocumentItemClickListener
 ) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +22,11 @@ class DocumentsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(documents[position])
+        val currentDocument = documents[position]
+        holder.bind(currentDocument)
+        holder.itemView.setOnClickListener {
+            clickListener.onDocumentItemClick(currentDocument)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -58,5 +63,10 @@ class DocumentsAdapter(
             binding.descriptionTextView.text = item.description
             binding.expirationDateTextView.text = statusText
         }
+    }
+
+    interface OnDocumentItemClickListener {
+
+        fun onDocumentItemClick(document: PortfolioDocument)
     }
 }
