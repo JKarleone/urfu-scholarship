@@ -7,8 +7,6 @@ import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.ItemPortfolioDocumentBinding
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
 import ru.intelligency.scholarship.presentation.utils.DocumentStatus
-import java.text.SimpleDateFormat
-import java.util.*
 
 class DocumentsAdapter(
     private var documents: List<PortfolioDocument>,
@@ -33,22 +31,26 @@ class DocumentsAdapter(
         return documents.size
     }
 
+    fun submitData(list: List<PortfolioDocument>) {
+        this.documents = list
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(
         private val binding: ItemPortfolioDocumentBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PortfolioDocument) {
             val context = binding.root.context
-            val statusImage = when (item.status) {
+            val statusImage = when (item.documentStatus) {
                 DocumentStatus.ACCEPTED -> R.drawable.ic_accepted
                 DocumentStatus.IN_WAITING -> R.drawable.ic_waiting
                 DocumentStatus.REJECTED -> R.drawable.ic_rejected
             }
-            val statusText = when (item.status) {
+            val statusText = when (item.documentStatus) {
                 DocumentStatus.ACCEPTED -> {
-                    val simpleFormatter = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-                    val date = simpleFormatter.format(item.expirationDate)
-                    context.getString(R.string.portfolio_profile_expiration_date, date)
+                    val (day, month, year) = item.expirationDate
+                    context.getString(R.string.portfolio_profile_expiration_date, day, month, year)
                 }
                 DocumentStatus.IN_WAITING -> {
                     "Ожидает верификации"

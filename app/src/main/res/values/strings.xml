@@ -51,5 +51,5 @@
     <string name="notifications">Уведомления</string>
     <string name="profile">Профиль</string>
 
-    <string name="portfolio_profile_expiration_date">Действителен до: %1$s</string>
+    <string name="portfolio_profile_expiration_date">Действителен до: %1$d.%2$d.%3$d</string>
 </resources>
