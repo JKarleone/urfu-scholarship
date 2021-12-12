@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-android-extensions")
     id("kotlin-kapt")
 }
 
@@ -55,6 +56,15 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+
+    // Dagger
+    val daggerVersion = "2.40"
+    implementation("com.google.dagger:dagger:$daggerVersion")
+    implementation("com.google.dagger:dagger-android:$daggerVersion")
+//    implementation("com.google.dagger:dagger-android-support$daggerVersion")
+//    kapt("com.google.dagger:dagger-android-support:$daggerVersion")
+    kapt("com.google.dagger:dagger-compiler:$daggerVersion")
+    kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

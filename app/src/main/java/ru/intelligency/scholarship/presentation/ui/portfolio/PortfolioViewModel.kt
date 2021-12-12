@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
-import ru.intelligency.scholarship.domain.portfolio.DocumentsInteractor
+import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 
 class PortfolioViewModel(
-    private val documentsInteractor: DocumentsInteractor
+    private val portfolioInteractor: PortfolioInteractor
 ) : ViewModel() {
 
-    val documents = documentsInteractor.getAllDocuments()
+    val documents = portfolioInteractor.getAllDocuments()
         .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
 }

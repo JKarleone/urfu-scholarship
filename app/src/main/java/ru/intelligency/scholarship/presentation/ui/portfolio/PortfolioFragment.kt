@@ -9,25 +9,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
-import ru.intelligency.scholarship.data.portfolio.DocumentsRepositoryImpl
 import ru.intelligency.scholarship.databinding.FragmentPortfolioBinding
-import ru.intelligency.scholarship.domain.portfolio.DocumentsInteractor
+import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.adapter.DocumentsAdapter
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
+import javax.inject.Inject
 
 class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
     DocumentsAdapter.OnDocumentItemClickListener {
 
-    private val repository = DocumentsRepositoryImpl()
-    private val interactor = DocumentsInteractor(repository)
+    @Inject
+    lateinit var viewModelFactory: PortfolioViewModelFactory
     private val viewModel: PortfolioViewModel by viewModels {
-        PortfolioViewModelFactory(interactor)
+        viewModelFactory
     }
     private val adapter = DocumentsAdapter(listOf(), this)
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_portfolio
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        (requireActivity().application as App).appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
