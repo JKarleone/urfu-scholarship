@@ -52,4 +52,26 @@
     <string name="profile">Профиль</string>
 
     <string name="portfolio_profile_expiration_date">Действителен до: %1$d.%2$d.%3$d</string>
+
+    <string name="document_add_doc">Добавить документ</string>
+    <string name="document_step1">Шаг 1. Отсканируйте документ</string>
+    <string name="document_step2">Шаг 2. Проверьте скан</string>
+    <string name="document_step3">Шаг 3. Добавьте информацию</string>
+    <string name="back">Назад</string>
+    <string name="document_save">Сохранить документ</string>
+    <string name="hint_document_name">Название документа</string>
+    <string name="hint_event_type">Тип мероприятия</string>
+    <string name="hint_event_status">Статус мероприятия</string>
+    <string name="hint_document_date">Дата получения документа</string>
+    <string name="hint_event_place">Место проведения мероприятия</string>
+
+    <string name="document_accepted">Документ верифицирован</string>
+    <string name="document_awaiting">Ожидает верификации</string>
+    <string name="document_rejected">Документ не прошёл верификацию</string>
+
+    <string name="application_accepted">Заявка принята</string>
+    <string name="application_awaiting">Заявка на рассмотрении</string>
+    <string name="application_rejected">Заявка отклонена</string>
+
+    <string name="document_details_receipt_date">%1$d.%2$d.%3$d (действителен до %4$d.%5$d.%6$d)</string>
 </resources>

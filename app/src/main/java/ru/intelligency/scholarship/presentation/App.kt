@@ -2,6 +2,7 @@ package ru.intelligency.scholarship.presentation
 
 import android.app.Application
 import ru.intelligency.scholarship.presentation.di.AppComponent
+import ru.intelligency.scholarship.presentation.di.ContextModule
 import ru.intelligency.scholarship.presentation.di.DaggerAppComponent
 
 class App : Application() {
@@ -13,7 +14,7 @@ class App : Application() {
         super.onCreate()
         appComponent = DaggerAppComponent
             .builder()
-//            .contextModule(ContextModule(this))
+            .contextModule(ContextModule(this))
             .build()
     }
 }

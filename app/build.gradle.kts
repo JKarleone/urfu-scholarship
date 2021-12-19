@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -65,6 +66,8 @@ dependencies {
 //    kapt("com.google.dagger:dagger-android-support:$daggerVersion")
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
     kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

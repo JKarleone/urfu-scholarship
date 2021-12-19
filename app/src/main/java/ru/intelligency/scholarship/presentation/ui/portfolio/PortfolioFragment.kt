@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -45,6 +46,7 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
             viewModel.documents.collect { list ->
                 adapter.submitData(list)
             }
+            viewModel.documents
         }
     }
 
@@ -54,11 +56,14 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
     }
 
     private fun addButtonClicked() {
-        Log.d(TAG, "Button Clicked!")
+        findNavController().navigate(R.id.action_navigation_portfolio_to_scanDocumentFragment)
     }
 
     override fun onDocumentItemClick(document: PortfolioDocument) {
         Log.d(TAG, "Document clicked!\n$document")
+        findNavController().navigate(
+            PortfolioFragmentDirections.actionNavigationPortfolioToDocumentDetailsFragment(document.id)
+        )
     }
 
     companion object {

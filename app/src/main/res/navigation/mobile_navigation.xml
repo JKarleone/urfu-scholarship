@@ -9,7 +9,14 @@
         android:id="@+id/navigation_portfolio"
         android:name="ru.intelligency.scholarship.presentation.ui.portfolio.PortfolioFragment"
         android:label="@string/portfolio"
-        tools:layout="@layout/fragment_portfolio" />
+        tools:layout="@layout/fragment_portfolio">
+        <action
+            android:id="@+id/action_navigation_portfolio_to_scanDocumentFragment"
+            app:destination="@id/scanDocumentFragment" />
+        <action
+            android:id="@+id/action_navigation_portfolio_to_documentDetailsFragment"
+            app:destination="@id/documentDetailsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_my_applications"
@@ -27,4 +34,41 @@
         android:name="ru.intelligency.scholarship.presentation.ui.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/scanDocumentFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.ScanDocumentFragment"
+        android:label="ScanDocumentFragment"
+        tools:layout="@layout/fragment_scan_document">
+        <action
+            android:id="@+id/action_scanDocumentFragment_to_scanResultFragment"
+            app:destination="@id/scanResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanResultFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.ScanResultFragment"
+        android:label="ScanResultFragment"
+        tools:layout="@layout/fragment_scan_result">
+        <action
+            android:id="@+id/action_scanResultFragment_to_scanDocumentInfoFragment"
+            app:destination="@id/scanDocumentInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanDocumentInfoFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.ScanDocumentInfoFragment"
+        android:label="ScanDocumentInfoFragment"
+        tools:layout="@layout/fragment_scan_document_info">
+        <action
+            android:id="@+id/action_scanDocumentInfoFragment_to_navigation_portfolio"
+            app:destination="@id/navigation_portfolio" />
+    </fragment>
+    <fragment
+        android:id="@+id/documentDetailsFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.DocumentDetailsFragment"
+        android:label="DocumentDetailsFragment"
+        tools:layout="@layout/fragment_document_details">
+        <argument
+            android:name="documentId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
