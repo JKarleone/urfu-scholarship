@@ -2,6 +2,8 @@ package ru.intelligency.scholarship.presentation.ui.portfolio
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -43,10 +45,30 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
                 backButton.setOnClickListener {
                     requireActivity().onBackPressed()
                 }
+                optionsButton.setOnClickListener {
+                    showMenu(it, R.menu.document_details_popup_menu)
+                }
             }
         }
 
         collectDocument()
+    }
+
+    private fun showMenu(view: View, menuRes: Int) {
+        val popup = PopupMenu(requireContext(), view)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.delete -> {
+                    Toast.makeText(requireContext(), "Удаление", Toast.LENGTH_SHORT).show()
+                }
+                R.id.edit -> {
+                    Toast.makeText(requireContext(), "Редактирование", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
+        popup.show()
     }
 
     private fun collectDocument() {
