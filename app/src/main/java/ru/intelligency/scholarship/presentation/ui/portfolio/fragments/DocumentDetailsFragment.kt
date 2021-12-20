@@ -61,11 +61,14 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.delete -> {
+                    // TODO: delete from data source and get back to PortFolioFragment
                     Toast.makeText(requireContext(), "Удаление", Toast.LENGTH_SHORT).show()
                 }
                 R.id.edit -> {
-                    Toast.makeText(requireContext(), "Редактирование", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_documentDetailsFragment_to_documentDetailsEditFragment)
+                    findNavController().navigate(
+                        DocumentDetailsFragmentDirections
+                            .actionDocumentDetailsFragmentToDocumentDetailsEditFragment(args.documentId)
+                    )
                 }
             }
             true

@@ -78,5 +78,9 @@
         android:id="@+id/documentDetailsEditFragment"
         android:name="ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentDetailsEditFragment"
         android:label="DocumentDetailsEditFragment"
-        tools:layout="@layout/fragment_document_details_edit" />
+        tools:layout="@layout/fragment_document_details_edit">
+        <argument
+            android:name="documentId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
