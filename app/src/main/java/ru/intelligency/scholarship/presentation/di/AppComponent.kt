@@ -1,8 +1,8 @@
 package ru.intelligency.scholarship.presentation.di
 
 import dagger.Component
-import ru.intelligency.scholarship.presentation.ui.portfolio.DocumentDetailsFragment
-import ru.intelligency.scholarship.presentation.ui.portfolio.PortfolioFragment
+import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentDetailsFragment
+import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.PortfolioFragment
 import javax.inject.Singleton
 
 @Singleton

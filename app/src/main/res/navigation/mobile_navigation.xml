@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_portfolio"
-        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.PortfolioFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.fragments.PortfolioFragment"
         android:label="@string/portfolio"
         tools:layout="@layout/fragment_portfolio">
         <action
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/scanDocumentFragment"
-        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.ScanDocumentFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.fragments.ScanDocumentFragment"
         android:label="ScanDocumentFragment"
         tools:layout="@layout/fragment_scan_document">
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/scanResultFragment"
-        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.ScanResultFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.fragments.ScanResultFragment"
         android:label="ScanResultFragment"
         tools:layout="@layout/fragment_scan_result">
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/scanDocumentInfoFragment"
-        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.ScanDocumentInfoFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.fragments.ScanDocumentInfoFragment"
         android:label="ScanDocumentInfoFragment"
         tools:layout="@layout/fragment_scan_document_info">
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/documentDetailsFragment"
-        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.DocumentDetailsFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentDetailsFragment"
         android:label="DocumentDetailsFragment"
         tools:layout="@layout/fragment_document_details">
         <argument

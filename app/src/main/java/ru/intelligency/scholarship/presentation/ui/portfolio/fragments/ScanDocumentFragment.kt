@@ -1,4 +1,4 @@
-package ru.intelligency.scholarship.presentation.ui.portfolio
+package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import android.os.Bundle
 import android.view.View

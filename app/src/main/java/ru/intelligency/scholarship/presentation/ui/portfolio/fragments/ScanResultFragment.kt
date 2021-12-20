@@ -1,16 +1,16 @@
-package ru.intelligency.scholarship.presentation.ui.portfolio
+package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ru.intelligency.scholarship.R
-import ru.intelligency.scholarship.databinding.FragmentScanDocumentInfoBinding
+import ru.intelligency.scholarship.databinding.FragmentScanResultBinding
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 
-class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>() {
+class ScanResultFragment : BaseFragment<FragmentScanResultBinding>() {
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_scan_document_info
+        return R.layout.fragment_scan_result
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,8 +22,8 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
                     requireActivity().onBackPressed()
                 }
             }
-            saveButton.setOnClickListener {
-                findNavController().navigate(R.id.action_scanDocumentInfoFragment_to_navigation_portfolio)
+            nextButton.setOnClickListener {
+                findNavController().navigate(R.id.action_scanResultFragment_to_scanDocumentInfoFragment)
             }
         }
     }

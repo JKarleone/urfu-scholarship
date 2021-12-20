@@ -1,4 +1,4 @@
-package ru.intelligency.scholarship.presentation.ui.portfolio
+package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +15,8 @@ import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.adapter.DocumentsAdapter
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
+import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.PortfolioViewModel
+import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.PortfolioViewModelFactory
 import javax.inject.Inject
 
 class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),

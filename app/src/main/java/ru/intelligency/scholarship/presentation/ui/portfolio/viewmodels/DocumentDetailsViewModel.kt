@@ -1,4 +1,4 @@
-package ru.intelligency.scholarship.presentation.ui.portfolio
+package ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

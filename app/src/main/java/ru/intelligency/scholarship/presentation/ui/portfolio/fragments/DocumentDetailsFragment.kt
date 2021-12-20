@@ -1,4 +1,4 @@
-package ru.intelligency.scholarship.presentation.ui.portfolio
+package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -16,6 +16,8 @@ import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsViewModel
+import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsViewModelFactory
 import ru.intelligency.scholarship.presentation.utils.DocumentStatus
 import javax.inject.Inject
 
