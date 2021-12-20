@@ -74,4 +74,7 @@
     <string name="application_rejected">Заявка отклонена</string>
 
     <string name="document_details_receipt_date">%1$d.%2$d.%3$d (действителен до %4$d.%5$d.%6$d)</string>
+    <string name="document_delete">Удалить документ</string>
+    <string name="editing">Редактирование</string>
+    <string name="delete">Удалить</string>
 </resources>

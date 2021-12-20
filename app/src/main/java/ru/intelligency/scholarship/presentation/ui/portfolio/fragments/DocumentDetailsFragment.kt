@@ -7,6 +7,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -42,14 +43,12 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        with(binding) {
-            with(toolbar) {
-                backButton.setOnClickListener {
-                    requireActivity().onBackPressed()
-                }
-                optionsButton.setOnClickListener {
-                    showMenu(it, R.menu.document_details_popup_menu)
-                }
+        with(binding.toolbar) {
+            backButton.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
+            optionsButton.setOnClickListener {
+                showMenu(it, R.menu.document_details_popup_menu)
             }
         }
 
@@ -66,6 +65,7 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
                 }
                 R.id.edit -> {
                     Toast.makeText(requireContext(), "Редактирование", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_documentDetailsFragment_to_documentDetailsEditFragment)
                 }
             }
             true
