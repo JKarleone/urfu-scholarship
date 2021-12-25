@@ -14,7 +14,7 @@
             android:name=".presentation.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Scholarship.NoActionBar" />
+            android:theme="@style/Theme.Scholarship" />
         <activity
             android:name=".presentation.entrance.EntranceActivity"
             android:exported="true">
