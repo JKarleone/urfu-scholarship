@@ -20,13 +20,21 @@ class DocumentsRepositoryImpl : DocumentsRepository {
         }
     }
 
+    override fun getDefaultEventTypes(): List<String> {
+        return defaultEventTypes
+    }
+
+    override fun getDefaultEventStatuses(): List<String> {
+        return defaultEventStatuses
+    }
+
     private val documentsList = listOf(
         Document(
             id = 0,
             title = "Сертификат",
             documentStatus = DocumentStatus.IN_WAITING,
             eventType = "Хакатон",
-            eventStatus = "Международный",
+            eventStatus = "Международное",
             dateOfReceipt = SimpleDate(1, 1, 2022),
             eventLocation = "Екатеринбург"
         ),
@@ -35,9 +43,24 @@ class DocumentsRepositoryImpl : DocumentsRepository {
             title = "Диплом",
             documentStatus = DocumentStatus.ACCEPTED,
             eventType = "Хакатон",
-            eventStatus = "Международный",
+            eventStatus = "Международное",
             dateOfReceipt = SimpleDate(1, 1, 2022),
             eventLocation = "Екатеринбург"
         )
     )
+
+    companion object {
+
+        private val defaultEventTypes = listOf(
+            "Хакатон",
+            "Олимпиада",
+            "Конференция",
+            "Конкурс",
+            "Соревнование",
+            "Состязание",
+            "Другое"
+        )
+        private val defaultEventStatuses =
+            listOf("Международное", "Всероссийское", "Ведомственное", "Региональное", "Другое")
+    }
 }

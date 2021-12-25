@@ -35,4 +35,12 @@ class PortfolioInteractor(
             receiptDate.year + 2
         )
     }
+
+    fun getDefaultEventTypes(): List<String> {
+        return documentsRepository.getDefaultEventTypes()
+    }
+
+    fun getDefaultEventStatuses(): List<String> {
+        return documentsRepository.getDefaultEventStatuses()
+    }
 }

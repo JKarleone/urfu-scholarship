@@ -2,6 +2,8 @@ package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -25,6 +27,8 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
     private val viewModel: DocumentDetailsEditViewModel by viewModels {
         DocumentDetailsEditViewModelFactory(interactor, args.documentId)
     }
+    private val defaultEventTypes by lazy { viewModel.getDefaultEventTypes() }
+    private val defaultEventStatuses by lazy { viewModel.getDefaultEventStatuses() }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_document_details_edit
@@ -54,18 +58,88 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
             }
 
         }
+        initAdapters()
+        fillFields()
+    }
+
+    private fun initAdapters() {
+        with(binding.eventTypeInputLayoutExposed.editText as AutoCompleteTextView) {
+            val typesAdapter =
+                ArrayAdapter(
+                    requireContext(),
+                    R.layout.support_simple_spinner_dropdown_item,
+                    defaultEventTypes
+                )
+            setAdapter(typesAdapter)
+            setOnItemClickListener { _, _, position, _ ->
+                binding.eventTypeInputLayout.visibility =
+                    if (position == defaultEventTypes.size - 1) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+            }
+        }
+        with(binding.eventStatusInputLayoutExposed.editText as AutoCompleteTextView) {
+            val statusAdapter =
+                ArrayAdapter(
+                    requireContext(),
+                    R.layout.support_simple_spinner_dropdown_item,
+                    defaultEventStatuses
+                )
+            setAdapter(statusAdapter)
+            setOnItemClickListener { _, _, position, _ ->
+                binding.eventStatusInputLayout.visibility =
+                    if (position == defaultEventStatuses.size - 1) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+            }
+        }
+    }
+
+    private fun fillFields() {
         lifecycleScope.launch {
             viewModel.document.collect { document ->
                 with(binding) {
                     documentNameInputLayout.editText?.setText(document.title)
-                    eventTypeInputLayout.editText?.setText(document.eventType)
-                    eventStatusInputLayout.editText?.setText(document.eventStatus)
                     val (day, month, year) = document.dateOfReceipt
                     documentDateInputLayout.editText?.setText(
                         getString(R.string.default_date, day, month, year)
                     )
                     eventPlaceInputLayout.editText?.setText(document.eventLocation)
+                    setEventType(document.eventType)
+                    setEventStatus(document.eventStatus)
                 }
+            }
+        }
+    }
+
+    private fun setEventType(eventType: String) {
+        with(binding) {
+            if (eventType in defaultEventTypes) {
+                eventTypeExposed.setText(eventType, false)
+                eventTypeInputLayout.editText?.setText("")
+                eventTypeInputLayout.visibility = View.GONE
+            } else {
+                eventTypeExposed.setText(defaultEventTypes.last(), false)
+                eventTypeInputLayout.visibility = View.VISIBLE
+                eventTypeInputLayout.editText?.setText(eventType)
+            }
+        }
+    }
+
+    private fun setEventStatus(eventStatus: String) {
+        with(binding) {
+            if (eventStatus in defaultEventStatuses) {
+                eventStatusExposed.setText(eventStatus, false)
+                eventStatusInputLayout.editText?.setText("")
+                eventStatusInputLayout.visibility = View.GONE
+            } else {
+                eventStatusExposed.setText(defaultEventStatuses.last(), false)
+                eventStatusInputLayout.visibility = View.VISIBLE
+                eventStatusInputLayout.editText?.setText(eventStatus)
             }
         }
     }

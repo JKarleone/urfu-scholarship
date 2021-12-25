@@ -42,7 +42,7 @@
             android:id="@+id/fullNameInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/fullNameHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -65,7 +65,7 @@
             android:id="@+id/academicGroupNumberInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/academicGroupNumberHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,7 +88,7 @@
             android:id="@+id/specialityNameInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/specialityNameHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +111,7 @@
             android:id="@+id/phoneNumberInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/phoneNumberHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText

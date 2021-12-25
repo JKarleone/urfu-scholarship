@@ -8,4 +8,8 @@ interface DocumentsRepository {
     fun getAllDocuments(): Flow<List<Document>>
 
     fun getDocument(id: Int): Flow<Document>
+
+    fun getDefaultEventTypes(): List<String>
+
+    fun getDefaultEventStatuses(): List<String>
 }

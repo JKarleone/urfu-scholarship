@@ -42,15 +42,14 @@
             android:id="@+id/emailInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/emailHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/placeholder_email"
-                android:inputType="textEmailAddress"
-                android:paddingVertical="14dp" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -67,12 +66,12 @@
             android:id="@+id/passwordInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/passwordHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="@string/placeholder_password" />
         </com.google.android.material.textfield.TextInputLayout>

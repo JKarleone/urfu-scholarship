@@ -35,7 +35,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/documentNameInputLayout"
-                    style="@style/DefaultTextInputLayout"
+                    style="@style/TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -48,16 +48,31 @@
                     android:id="@+id/eventTypeHint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/hint_event_type"
                     android:textAppearance="@style/HintText"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/eventTypeInputLayout"
-                    style="@style/DefaultTextInputLayout"
+                    android:id="@+id/eventTypeInputLayoutExposed"
+                    style="@style/ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/eventTypeExposed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/eventTypeInputLayout"
+                    style="@style/TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -68,15 +83,30 @@
                     android:id="@+id/eventStatusHint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/hint_event_status"
                     android:textAppearance="@style/HintText" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/eventStatusInputLayout"
-                    style="@style/DefaultTextInputLayout"
+                    android:id="@+id/eventStatusInputLayoutExposed"
+                    style="@style/ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/eventStatusExposed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/eventStatusInputLayout"
+                    style="@style/TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -87,13 +117,13 @@
                     android:id="@+id/documentDateHint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/hint_document_date"
                     android:textAppearance="@style/HintText" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/documentDateInputLayout"
-                    style="@style/DefaultTextInputLayout"
+                    style="@style/TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -106,14 +136,14 @@
                     android:id="@+id/eventPlaceHint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/hint_event_place"
                     android:textAppearance="@style/HintText"
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/eventPlaceInputLayout"
-                    style="@style/DefaultTextInputLayout"
+                    style="@style/TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -126,7 +156,7 @@
                     android:id="@+id/saveButton"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
                     android:text="@string/document_save"
                     android:textAppearance="@style/ButtonText"
                     app:cornerRadius="8dp" />

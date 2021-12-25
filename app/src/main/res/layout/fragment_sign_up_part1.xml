@@ -40,7 +40,7 @@
             android:id="@+id/emailInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/emailHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +64,7 @@
             android:id="@+id/passwordInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/passwordHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,7 +88,7 @@
             android:id="@+id/passwordRepeatInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/DefaultTextInputLayout"
+            style="@style/TextInputLayout"
             app:layout_constraintTop_toBottomOf="@id/passwordRepeatHintTextView">
 
             <com.google.android.material.textfield.TextInputEditText
