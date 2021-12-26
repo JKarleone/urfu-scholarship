@@ -7,6 +7,8 @@ import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentD
 import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentDetailsFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.PortfolioFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.ScanDocumentInfoFragment
+import ru.intelligency.scholarship.presentation.ui.profile.ProfileEditFragment
+import ru.intelligency.scholarship.presentation.ui.profile.ProfileFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -26,4 +28,6 @@ interface AppComponent {
     fun inject(scanDocumentInfoFragment: ScanDocumentInfoFragment)
     fun inject(myApplicationsFragment: MyApplicationsFragment)
     fun inject(applicationDetailsFragment: ApplicationDetailsFragment)
+    fun inject(profileFragment: ProfileFragment)
+    fun inject(profileEditFragment: ProfileEditFragment)
 }

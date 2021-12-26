@@ -37,7 +37,11 @@
         android:id="@+id/navigation_profile"
         android:name="ru.intelligency.scholarship.presentation.ui.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/scanDocumentFragment"
@@ -96,4 +100,9 @@
             android:name="applicationId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="ru.intelligency.scholarship.presentation.ui.profile.ProfileEditFragment"
+        android:label="ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit" />
 </navigation>
