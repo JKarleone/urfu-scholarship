@@ -14,6 +14,7 @@ import ru.intelligency.scholarship.databinding.FragmentDocumentDetailsEditBindin
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.extensions.getStringDate
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModel
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModelFactory
 import javax.inject.Inject
@@ -104,10 +105,7 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
             viewModel.document.collect { document ->
                 with(binding) {
                     documentNameInputLayout.editText?.setText(document.title)
-                    val (day, month, year) = document.dateOfReceipt
-                    documentDateInputLayout.editText?.setText(
-                        getString(R.string.default_date, day, month, year)
-                    )
+                    documentDateInputLayout.editText?.setText(document.dateOfReceipt.getStringDate())
                     eventPlaceInputLayout.editText?.setText(document.eventLocation)
                     setEventType(document.eventType)
                     setEventStatus(document.eventStatus)

@@ -7,6 +7,7 @@ import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.domain.portfolio.extensions.toPortfolioDocument
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
+import ru.intelligency.scholarship.presentation.extensions.getStringDate
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
 
 class PortfolioInteractor(
@@ -27,12 +28,8 @@ class PortfolioInteractor(
     fun getModifiedReceiptDate(receiptDate: SimpleDate): String {
         return context.getString(
             R.string.document_details_receipt_date,
-            receiptDate.day,
-            receiptDate.month,
-            receiptDate.year,
-            receiptDate.day,
-            receiptDate.month,
-            receiptDate.year + 2
+            receiptDate.getStringDate(),
+            SimpleDate(receiptDate.day, receiptDate.month, receiptDate.year + 2).getStringDate()
         )
     }
 
