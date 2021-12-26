@@ -3,6 +3,8 @@ package ru.intelligency.scholarship.presentation.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import ru.intelligency.scholarship.domain.myapplications.ApplicationsInteractor
+import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
 import ru.intelligency.scholarship.domain.portfolio.DocumentsRepository
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 
@@ -15,5 +17,12 @@ class InteractorModule {
         documentsRepository: DocumentsRepository
     ): PortfolioInteractor {
         return PortfolioInteractor(documentsRepository, context)
+    }
+
+    @Provides
+    fun provideApplicationsInteractor(
+        applicationsRepository: ApplicationsRepository
+    ): ApplicationsInteractor {
+        return ApplicationsInteractor(applicationsRepository)
     }
 }

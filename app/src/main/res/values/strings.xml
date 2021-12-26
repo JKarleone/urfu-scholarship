@@ -51,7 +51,7 @@
     <string name="notifications">Уведомления</string>
     <string name="profile">Профиль</string>
 
-    <string name="portfolio_profile_expiration_date">Действителен до: %1$d.%2$d.%3$d</string>
+    <string name="portfolio_profile_expiration_date">Действителен до: %1$s</string>
 
     <string name="document_add_doc">Добавить документ</string>
     <string name="document_step1">Шаг 1. Отсканируйте документ</string>
@@ -78,4 +78,6 @@
     <string name="document_delete">Удалить документ</string>
     <string name="editing">Редактирование</string>
     <string name="delete">Удалить</string>
+
+    <string name="application_status_text">Отправлено %1$s</string>
 </resources>

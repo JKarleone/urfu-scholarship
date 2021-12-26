@@ -1,44 +1,62 @@
 package ru.intelligency.scholarship.presentation.ui.myapplications
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import ru.intelligency.scholarship.databinding.FragmentDashboardBinding
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import ru.intelligency.scholarship.R
+import ru.intelligency.scholarship.databinding.FragmentMyApplicationsBinding
+import ru.intelligency.scholarship.domain.myapplications.models.Application
+import ru.intelligency.scholarship.presentation.App
+import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.ui.myapplications.adapter.ApplicationsAdapter
+import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModel
+import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModelFactory
+import javax.inject.Inject
 
-class MyApplicationsFragment : Fragment() {
+class MyApplicationsFragment : BaseFragment<FragmentMyApplicationsBinding>(),
+    ApplicationsAdapter.OnApplicationItemClickListener {
 
-    private lateinit var myApplicationsViewModel: MyApplicationsViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    @Inject
+    lateinit var viewModelFactory: ApplicationsViewModelFactory
+    private val viewModel: ApplicationsViewModel by viewModels { viewModelFactory }
+    private val applicationsAdapter = ApplicationsAdapter(listOf(), this)
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        myApplicationsViewModel =
-            ViewModelProvider(this).get(MyApplicationsViewModel::class.java)
-
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        myApplicationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_my_applications
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        (requireActivity().application as App).appComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupRecyclerView()
+        observeApplications()
+    }
+
+    private fun observeApplications() {
+        lifecycleScope.launch {
+            viewModel.applications.collect { applications ->
+                applicationsAdapter.submitData(applications)
+            }
+        }
+    }
+
+    private fun setupRecyclerView() {
+        with(binding.applicationsRecyclerView) {
+            adapter = applicationsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    override fun onApplicationItemClick(application: Application) {
+        Toast.makeText(requireContext(), "Клик", Toast.LENGTH_SHORT).show()
     }
 }

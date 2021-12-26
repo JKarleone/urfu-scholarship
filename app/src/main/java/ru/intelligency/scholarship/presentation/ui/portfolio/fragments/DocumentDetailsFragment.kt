@@ -19,7 +19,7 @@ import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsViewModel
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsViewModelFactory
-import ru.intelligency.scholarship.presentation.utils.DocumentStatus
+import ru.intelligency.scholarship.presentation.utils.Status
 import javax.inject.Inject
 
 class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
@@ -93,13 +93,13 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
 
     private fun setStatusMessage(document: Document) {
         when (document.documentStatus) {
-            DocumentStatus.IN_WAITING -> {
+            Status.IN_WAITING -> {
                 setStatusMessageAwaiting()
             }
-            DocumentStatus.ACCEPTED -> {
+            Status.ACCEPTED -> {
                 setStatusMessageAccepted()
             }
-            DocumentStatus.REJECTED -> {
+            Status.REJECTED -> {
                 setStatusMessageRejected()
             }
         }

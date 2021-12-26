@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/portfolioDocumentCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="8dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="8dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/portfolioDocumentCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp">
+        <ImageView
+            android:id="@+id/portfolioDocumentImageView"
+            android:layout_width="57dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_portfolio_document_empty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="contentDescription" />
 
-            <ImageView
-                android:id="@+id/portfolioDocumentImageView"
-                android:layout_width="57dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_portfolio_document_empty"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="contentDescription" />
-
-            <ImageView
-                android:id="@+id/statusImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/expirationDateTextView"
-                app:layout_constraintStart_toStartOf="@id/descriptionTextView"
-                app:layout_constraintTop_toTopOf="@id/expirationDateTextView"
-                tools:ignore="contentDescription"
-                tools:src="@drawable/ic_accepted" />
+        <ImageView
+            android:id="@+id/statusImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/statusText"
+            app:layout_constraintStart_toStartOf="@id/descriptionTextView"
+            app:layout_constraintTop_toTopOf="@id/statusText"
+            tools:ignore="contentDescription"
+            tools:src="@drawable/ic_accepted" />
 
             <TextView
                 android:id="@+id/nameTextView"
@@ -51,13 +48,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Subtitle"
-                app:layout_constraintBottom_toTopOf="@id/expirationDateTextView"
+                app:layout_constraintBottom_toTopOf="@id/statusText"
                 app:layout_constraintStart_toStartOf="@id/nameTextView"
                 app:layout_constraintTop_toBottomOf="@id/nameTextView"
                 tools:text="Хакатон, Муждународное" />
 
             <TextView
-                android:id="@+id/expirationDateTextView"
+                android:id="@+id/statusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -69,5 +66,3 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-</FrameLayout>

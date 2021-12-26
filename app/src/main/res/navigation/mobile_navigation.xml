@@ -22,7 +22,7 @@
         android:id="@+id/navigation_my_applications"
         android:name="ru.intelligency.scholarship.presentation.ui.myapplications.MyApplicationsFragment"
         android:label="@string/my_applications"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_my_applications" />
 
     <fragment
         android:id="@+id/navigation_notifications"

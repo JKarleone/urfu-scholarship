@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flow
 import ru.intelligency.scholarship.domain.portfolio.DocumentsRepository
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
-import ru.intelligency.scholarship.presentation.utils.DocumentStatus
+import ru.intelligency.scholarship.presentation.utils.Status
 
 class DocumentsRepositoryImpl : DocumentsRepository {
 
@@ -32,7 +32,7 @@ class DocumentsRepositoryImpl : DocumentsRepository {
         Document(
             id = 0,
             title = "Сертификат",
-            documentStatus = DocumentStatus.IN_WAITING,
+            documentStatus = Status.IN_WAITING,
             eventType = "Хакатон",
             eventStatus = "Международное",
             dateOfReceipt = SimpleDate(1, 1, 2022),
@@ -41,7 +41,7 @@ class DocumentsRepositoryImpl : DocumentsRepository {
         Document(
             id = 1,
             title = "Диплом",
-            documentStatus = DocumentStatus.ACCEPTED,
+            documentStatus = Status.ACCEPTED,
             eventType = "Хакатон",
             eventStatus = "Международное",
             dateOfReceipt = SimpleDate(1, 1, 2022),

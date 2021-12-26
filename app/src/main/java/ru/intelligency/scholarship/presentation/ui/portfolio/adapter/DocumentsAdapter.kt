@@ -3,10 +3,10 @@ package ru.intelligency.scholarship.presentation.ui.portfolio.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.ItemPortfolioDocumentBinding
+import ru.intelligency.scholarship.presentation.extensions.getStatusText
+import ru.intelligency.scholarship.presentation.extensions.setStatusIcon
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
-import ru.intelligency.scholarship.presentation.utils.DocumentStatus
 
 class DocumentsAdapter(
     private var documents: List<PortfolioDocument>,
@@ -42,28 +42,13 @@ class DocumentsAdapter(
 
         fun bind(item: PortfolioDocument) {
             val context = binding.root.context
-            val statusImage = when (item.documentStatus) {
-                DocumentStatus.ACCEPTED -> R.drawable.ic_accepted
-                DocumentStatus.IN_WAITING -> R.drawable.ic_waiting
-                DocumentStatus.REJECTED -> R.drawable.ic_rejected
-            }
-            val statusText = when (item.documentStatus) {
-                DocumentStatus.ACCEPTED -> {
-                    val (day, month, year) = item.expirationDate
-                    context.getString(R.string.portfolio_profile_expiration_date, day, month, year)
-                }
-                DocumentStatus.IN_WAITING -> {
-                    "Ожидает верификации"
-                }
-                DocumentStatus.REJECTED -> {
-                    "Срок действия истек"
-                }
-            }
 
-            binding.statusImageView.setImageResource(statusImage)
-            binding.nameTextView.text = item.name
-            binding.descriptionTextView.text = item.description
-            binding.expirationDateTextView.text = statusText
+            with(binding) {
+                statusImageView.setStatusIcon(item.documentStatus)
+                nameTextView.text = item.name
+                descriptionTextView.text = item.description
+                statusText.text = item.getStatusText(context)
+            }
         }
     }
 

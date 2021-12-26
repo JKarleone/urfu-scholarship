@@ -6,31 +6,30 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_background_color"
         tools:ignore="contentDescription">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/rootLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".presentation.ui.portfolio.fragments.PortfolioFragment">
+            tools:context=".presentation.ui.myapplications.MyApplicationsFragment">
 
             <TextView
-                android:id="@+id/titleTextView"
+                android:id="@+id/applicationTitle"
                 style="@style/TitleH1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="17dp"
+                android:text="@string/my_applications"
                 android:textAlignment="center"
-                android:text="@string/portfolio"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/documentsRecyclerView"
+                android:id="@+id/applicationsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:background="@color/secondary_gray_background"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+                app:layout_constraintTop_toBottomOf="@id/applicationTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,6 +39,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="24dp"
             android:src="@drawable/ic_add"
-            app:tint="@color/primary_white" />
+            android:tint="@color/primary_white" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
