@@ -89,4 +89,7 @@
     <string name="application_excellent_marks_count">Количество оценок отлично</string>
     <string name="application_linked_documents">Прикрепленные документы</string>
     <string name="application_cancel">Отменить заявку</string>
+
+    <string name="notification_title">Уведомления</string>
+    <string name="notification_message">Находится в разработке</string>
 </resources>
