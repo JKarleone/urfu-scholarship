@@ -80,4 +80,13 @@
     <string name="delete">Удалить</string>
 
     <string name="application_status_text">Отправлено %1$s</string>
+    <string name="application_scholarship_type">Тип стипендии</string>
+    <string name="application_full_name">ФИО</string>
+    <string name="application_academic_group_number">Номер академической группы</string>
+    <string name="application_speciality_code">Код специальности</string>
+    <string name="application_speciality_name">Наименование специальности</string>
+    <string name="application_total_marks_count">Общее количество оценок</string>
+    <string name="application_excellent_marks_count">Количество оценок отлично</string>
+    <string name="application_linked_documents">Прикрепленные документы</string>
+    <string name="application_cancel">Отменить заявку</string>
 </resources>

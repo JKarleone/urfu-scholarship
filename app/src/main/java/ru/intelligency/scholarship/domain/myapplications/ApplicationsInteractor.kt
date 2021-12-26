@@ -10,4 +10,8 @@ class ApplicationsInteractor(
     fun getApplications(): Flow<List<Application>> {
         return repository.getApplications()
     }
+
+    fun getApplication(id: String): Flow<Application> {
+        return repository.getApplicationById(id)
+    }
 }

@@ -35,53 +35,57 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                style="@style/Subtitle"
+                android:layout_marginTop="18dp"
                 android:text="@string/hint_event_type" />
 
             <TextView
                 android:id="@+id/eventType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/BodyRegular"
                 tools:text="Хакатон" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                style="@style/Subtitle"
+                android:layout_marginTop="12dp"
                 android:text="@string/hint_event_status" />
 
             <TextView
                 android:id="@+id/eventStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/BodyRegular"
                 tools:text="Международное" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                style="@style/Subtitle"
+                android:layout_marginTop="12dp"
                 android:text="@string/hint_document_date" />
 
             <TextView
                 android:id="@+id/documentDateReceipt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/BodyRegular"
                 tools:text="13.09.2020 (действителен до 13.09.2022)" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                style="@style/Subtitle"
+                android:layout_marginTop="12dp"
                 android:text="@string/hint_event_place" />
 
             <TextView
                 android:id="@+id/eventLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                style="@style/BodyRegular"
                 tools:text="Финляндия, Хельсинки" />
 
         </LinearLayout>

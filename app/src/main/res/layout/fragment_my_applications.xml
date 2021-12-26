@@ -11,7 +11,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".presentation.ui.myapplications.MyApplicationsFragment">
+            tools:context=".presentation.ui.myapplications.fragments.MyApplicationsFragment">
 
             <TextView
                 android:id="@+id/applicationTitle"
@@ -39,6 +39,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="24dp"
             android:src="@drawable/ic_add"
-            android:tint="@color/primary_white" />
+            app:tint="@color/primary_white" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

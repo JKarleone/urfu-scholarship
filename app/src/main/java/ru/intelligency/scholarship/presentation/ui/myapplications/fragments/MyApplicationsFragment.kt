@@ -1,10 +1,10 @@
-package ru.intelligency.scholarship.presentation.ui.myapplications
+package ru.intelligency.scholarship.presentation.ui.myapplications.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -57,6 +57,10 @@ class MyApplicationsFragment : BaseFragment<FragmentMyApplicationsBinding>(),
     }
 
     override fun onApplicationItemClick(application: Application) {
-        Toast.makeText(requireContext(), "Клик", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(
+            MyApplicationsFragmentDirections.actionNavigationMyApplicationsToApplicationDetailsFragment(
+                application.id
+            )
+        )
     }
 }

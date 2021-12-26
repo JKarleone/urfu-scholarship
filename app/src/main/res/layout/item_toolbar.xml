@@ -22,6 +22,7 @@
         style="@style/Title18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:ellipsize="end"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"

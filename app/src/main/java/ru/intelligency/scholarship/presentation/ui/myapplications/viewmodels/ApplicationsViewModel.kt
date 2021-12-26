@@ -14,4 +14,9 @@ class ApplicationsViewModel(
 
     val applications: StateFlow<List<Application>> = applicationsInteractor.getApplications()
         .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+
+    suspend fun getApplication(id: String): StateFlow<Application> {
+        return applicationsInteractor.getApplication(id)
+            .stateIn(viewModelScope)
+    }
 }

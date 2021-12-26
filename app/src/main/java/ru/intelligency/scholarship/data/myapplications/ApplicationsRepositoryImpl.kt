@@ -11,7 +11,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
 
     private val applications = listOf(
         Application(
-            id = "",
+            id = "0",
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
             fullName = "Пупкин Вася Олегович",
             academicGroupNumber = "РИ-480022",
@@ -23,7 +23,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
             sendingDate = SimpleDate(1, 12, 2021)
         ),
         Application(
-            id = "",
+            id = "1",
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
             fullName = "Пупкин Вася Олегович",
             academicGroupNumber = "РИ-480022",
@@ -35,7 +35,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
             sendingDate = SimpleDate(1, 12, 2021)
         ),
         Application(
-            id = "",
+            id = "2",
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
             fullName = "Пупкин Вася Олегович",
             academicGroupNumber = "РИ-480022",
@@ -52,6 +52,12 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
     override fun getApplications(): Flow<List<Application>> {
         return flow {
             emit(applications)
+        }
+    }
+
+    override fun getApplicationById(id: String): Flow<Application> {
+        return flow {
+            emit(applications.first { it.id == id })
         }
     }
 }

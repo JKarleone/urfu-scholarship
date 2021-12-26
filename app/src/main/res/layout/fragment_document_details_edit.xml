@@ -172,6 +172,7 @@
                     style="?attr/materialButtonOutlinedStyle"
                     app:cornerRadius="8dp"
                     app:strokeColor="@color/secondary_red"
+                    app:rippleColor="@color/secondary_red_light"
                     app:strokeWidth="1dp" />
             </LinearLayout>
         </ScrollView>
