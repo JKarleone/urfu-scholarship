@@ -2,6 +2,7 @@ package ru.intelligency.scholarship.presentation.di
 
 import dagger.Component
 import ru.intelligency.scholarship.presentation.ui.myapplications.fragments.ApplicationDetailsFragment
+import ru.intelligency.scholarship.presentation.ui.myapplications.fragments.CreateNewApplicationFragment
 import ru.intelligency.scholarship.presentation.ui.myapplications.fragments.MyApplicationsFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentDetailsEditFragment
 import ru.intelligency.scholarship.presentation.ui.portfolio.fragments.DocumentDetailsFragment
@@ -30,4 +31,5 @@ interface AppComponent {
     fun inject(applicationDetailsFragment: ApplicationDetailsFragment)
     fun inject(profileFragment: ProfileFragment)
     fun inject(profileEditFragment: ProfileEditFragment)
+    fun inject(createNewApplicationFragment: CreateNewApplicationFragment)
 }

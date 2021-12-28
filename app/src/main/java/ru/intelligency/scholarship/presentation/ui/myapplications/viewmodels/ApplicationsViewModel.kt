@@ -19,4 +19,12 @@ class ApplicationsViewModel(
         return applicationsInteractor.getApplication(id)
             .stateIn(viewModelScope)
     }
+
+    fun saveApplication(application: Application) {
+        applicationsInteractor.saveApplication(application)
+    }
+
+    fun deleteApplication(applicationId: String) {
+        applicationsInteractor.deleteApplication(applicationId)
+    }
 }

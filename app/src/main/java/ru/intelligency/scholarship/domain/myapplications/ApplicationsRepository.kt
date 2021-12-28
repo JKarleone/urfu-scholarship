@@ -8,4 +8,8 @@ interface ApplicationsRepository {
     fun getApplications(): Flow<List<Application>>
 
     fun getApplicationById(id: String): Flow<Application>
+
+    fun saveApplication(application: Application)
+
+    fun deleteApplication(applicationId: String)
 }

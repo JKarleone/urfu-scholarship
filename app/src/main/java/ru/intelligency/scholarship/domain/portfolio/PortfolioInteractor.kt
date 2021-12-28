@@ -21,7 +21,7 @@ class PortfolioInteractor(
         }
     }
 
-    fun getDocument(id: Int): Flow<Document> {
+    fun getDocument(id: String): Flow<Document> {
         return documentsRepository.getDocument(id)
     }
 
@@ -39,5 +39,13 @@ class PortfolioInteractor(
 
     fun getDefaultEventStatuses(): List<String> {
         return documentsRepository.getDefaultEventStatuses()
+    }
+
+    fun saveDocument(document: Document) {
+        documentsRepository.saveDocument(document)
+    }
+
+    fun deleteDocument(id: String) {
+        documentsRepository.deleteDocument(id)
     }
 }

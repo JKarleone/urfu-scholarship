@@ -54,6 +54,10 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
         lifecycleScope.launch {
             viewModel.getApplication(args.applicationId).collect { application ->
                 fillFieldsWithApplication(application)
+                binding.cancelButton.setOnClickListener {
+                    viewModel.deleteApplication(application.id)
+                    requireActivity().onBackPressed()
+                }
             }
         }
     }

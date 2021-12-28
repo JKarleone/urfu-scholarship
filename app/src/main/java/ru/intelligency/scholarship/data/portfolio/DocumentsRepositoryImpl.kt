@@ -13,7 +13,7 @@ class DocumentsRepositoryImpl : DocumentsRepository {
         emit(documentsList)
     }
 
-    override fun getDocument(id: Int): Flow<Document> = flow {
+    override fun getDocument(id: String): Flow<Document> = flow {
         val document = documentsList.firstOrNull { document -> document.id == id }
         document?.let {
             emit(it)
@@ -28,9 +28,9 @@ class DocumentsRepositoryImpl : DocumentsRepository {
         return defaultEventStatuses
     }
 
-    private val documentsList = listOf(
+    private val documentsList = mutableListOf(
         Document(
-            id = 0,
+            id = "0",
             title = "Сертификат",
             documentStatus = Status.IN_WAITING,
             eventType = "Хакатон",
@@ -39,7 +39,7 @@ class DocumentsRepositoryImpl : DocumentsRepository {
             eventLocation = "Екатеринбург"
         ),
         Document(
-            id = 1,
+            id = "1",
             title = "Диплом",
             documentStatus = Status.ACCEPTED,
             eventType = "Хакатон",
@@ -48,6 +48,19 @@ class DocumentsRepositoryImpl : DocumentsRepository {
             eventLocation = "Екатеринбург"
         )
     )
+
+    override fun saveDocument(document: Document) {
+        if (documentsList.filter { it.id == document.id }.size > 1) {
+            deleteDocument(document.id)
+        }
+        documentsList.add(document)
+    }
+
+    override fun deleteDocument(documentId: String) {
+        documentsList.first { it.id == documentId }.apply {
+            documentsList.remove(this)
+        }
+    }
 
     companion object {
 

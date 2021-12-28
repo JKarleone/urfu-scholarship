@@ -10,7 +10,7 @@ import ru.intelligency.scholarship.domain.portfolio.model.Document
 
 class DocumentDetailsViewModel(
     private val interactor: PortfolioInteractor,
-    id: Int
+    id: String
 ) : ViewModel() {
 
     val document: StateFlow<Document> = interactor.getDocument(id)

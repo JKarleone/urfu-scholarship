@@ -2,6 +2,7 @@ package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import androidx.lifecycle.ViewModel
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
+import ru.intelligency.scholarship.domain.portfolio.model.Document
 
 class NewDocumentViewModel(
     private val interactor: PortfolioInteractor
@@ -13,5 +14,9 @@ class NewDocumentViewModel(
 
     fun getDefaultEventStatuses(): List<String> {
         return interactor.getDefaultEventStatuses()
+    }
+
+    fun saveDocument(document: Document) {
+        interactor.saveDocument(document)
     }
 }

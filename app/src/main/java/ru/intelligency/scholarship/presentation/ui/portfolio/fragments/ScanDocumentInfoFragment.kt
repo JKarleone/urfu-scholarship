@@ -8,8 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.FragmentScanDocumentInfoBinding
+import ru.intelligency.scholarship.domain.portfolio.model.Document
+import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import java.time.LocalDate
 import javax.inject.Inject
 
 class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>() {
@@ -87,7 +90,24 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
     }
 
     private fun checkInfoAndNavigate() {
-        // TODO
+        with(binding) {
+            val eventTypeExposed = binding.eventTypeInputLayoutExposed.editText?.text.toString()
+            val eventTypeInput = binding.eventTypeInputLayout.editText?.text.toString()
+            val eventType =
+                if (eventTypeExposed == eventTypesItems.last()) eventTypeInput else eventTypeExposed
+            val eventStatusExposed = binding.eventStatusInputLayoutExposed.editText?.text.toString()
+            val eventStatusInput = binding.eventStatusInputLayout.editText?.text.toString()
+            val eventStatus =
+                if (eventStatusExposed == eventStatusesItems.last()) eventStatusInput else eventStatusExposed
+            val newDoc = Document(
+                title = documentNameInputLayout.editText?.text.toString(),
+                eventType = eventType,
+                eventStatus = eventStatus,
+                dateOfReceipt = with(LocalDate.now()) { SimpleDate(dayOfMonth, monthValue, year) },
+                eventLocation = binding.eventPlaceInputLayout.editText?.text.toString()
+            )
+            viewModel.saveDocument(newDoc)
+        }
         findNavController().navigate(R.id.action_scanDocumentInfoFragment_to_navigation_portfolio)
     }
 }

@@ -1,9 +1,10 @@
 package ru.intelligency.scholarship.domain.portfolio.model
 
 import ru.intelligency.scholarship.presentation.utils.Status
+import java.util.*
 
 data class Document(
-    val id: Int = 0,
+    val id: String = UUID.randomUUID().toString(),
     val title: String = "",
     val documentStatus: Status = Status.IN_WAITING,
     val eventType: String = "",

@@ -9,7 +9,7 @@ import ru.intelligency.scholarship.presentation.utils.Status
 
 class ApplicationsRepositoryImpl : ApplicationsRepository {
 
-    private val applications = listOf(
+    private val applications = mutableListOf(
         Application(
             id = "0",
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
@@ -46,8 +46,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
             applicationStatus = Status.ACCEPTED,
             sendingDate = SimpleDate(1, 12, 2021)
         ),
-
-        )
+    )
 
     override fun getApplications(): Flow<List<Application>> {
         return flow {
@@ -58,6 +57,16 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
     override fun getApplicationById(id: String): Flow<Application> {
         return flow {
             emit(applications.first { it.id == id })
+        }
+    }
+
+    override fun saveApplication(application: Application) {
+        applications.add(application)
+    }
+
+    override fun deleteApplication(applicationId: String) {
+        applications.first { it.id == applicationId }.apply {
+            applications.remove(this)
         }
     }
 }
