@@ -74,6 +74,7 @@ dependencies {
     val roomVersion = "2.4.0"
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
 
     implementation("com.android.tools:desugar_jdk_libs:1.1.5")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")

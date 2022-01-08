@@ -8,7 +8,7 @@ import ru.intelligency.scholarship.domain.profile.models.Profile
 class ProfileRepositoryImpl : ProfileRepository {
 
     private val profile = Profile(
-        id = 0,
+        id = "0",
         fullName = "Глухов Антон Сергеевич",
         academicGroupNumber = "РИ-480022",
         email = "enton@nezavod.ru",
