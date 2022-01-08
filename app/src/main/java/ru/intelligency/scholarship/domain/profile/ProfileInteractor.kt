@@ -10,4 +10,8 @@ class ProfileInteractor(
     fun getProfile(): Flow<Profile> {
         return profileRepository.getProfile()
     }
+
+    fun updateProfile(profile: Profile) {
+        profileRepository.updateProfile(profile)
+    }
 }

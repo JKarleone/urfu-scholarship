@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.flow
 import ru.intelligency.scholarship.domain.profile.ProfileRepository
 import ru.intelligency.scholarship.domain.profile.models.Profile
 
-class ProfileRepositoryImpl : ProfileRepository {
+class ProfileRepositoryImpl(
+    private val sharedPreferences: UserSharedPreferences
+) : ProfileRepository {
 
     private val profile = Profile(
         id = "0",
@@ -17,7 +19,11 @@ class ProfileRepositoryImpl : ProfileRepository {
 
     override fun getProfile(): Flow<Profile> {
         return flow {
-            emit(profile)
+            emit(sharedPreferences.getUserData())
         }
+    }
+
+    override fun updateProfile(profile: Profile) {
+        sharedPreferences.updateUserData(profile)
     }
 }

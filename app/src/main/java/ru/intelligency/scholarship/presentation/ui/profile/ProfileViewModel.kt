@@ -11,9 +11,12 @@ class ProfileViewModel(
     private val profileInteractor: ProfileInteractor
 ) : ViewModel() {
 
-
     suspend fun getProfile(): StateFlow<Profile> {
         return profileInteractor.getProfile()
             .stateIn(viewModelScope)
+    }
+
+    fun updateProfile(profile: Profile) {
+        profileInteractor.updateProfile(profile)
     }
 }

@@ -6,4 +6,6 @@ import ru.intelligency.scholarship.domain.profile.models.Profile
 interface ProfileRepository {
 
     fun getProfile(): Flow<Profile>
+
+    fun updateProfile(profile: Profile)
 }

@@ -5,6 +5,7 @@ import dagger.Provides
 import ru.intelligency.scholarship.data.myapplications.ApplicationsRepositoryImpl
 import ru.intelligency.scholarship.data.portfolio.DocumentsRepositoryImpl
 import ru.intelligency.scholarship.data.profile.ProfileRepositoryImpl
+import ru.intelligency.scholarship.data.profile.UserSharedPreferences
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
 import ru.intelligency.scholarship.domain.portfolio.DocumentsRepository
 import ru.intelligency.scholarship.domain.profile.ProfileRepository
@@ -27,7 +28,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideProfileRepository(): ProfileRepository {
-        return ProfileRepositoryImpl()
+    fun provideProfileRepository(userSharedPreferences: UserSharedPreferences): ProfileRepository {
+        return ProfileRepositoryImpl(userSharedPreferences)
     }
 }

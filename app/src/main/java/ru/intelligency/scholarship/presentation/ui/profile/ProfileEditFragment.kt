@@ -11,6 +11,8 @@ import ru.intelligency.scholarship.databinding.FragmentProfileEditBinding
 import ru.intelligency.scholarship.domain.profile.models.Profile
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.extensions.checkField
+import ru.intelligency.scholarship.presentation.extensions.matchEmail
 import javax.inject.Inject
 
 class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
@@ -18,6 +20,7 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
     @Inject
     lateinit var viewModelFactory: ProfileViewModelFactory
     private val viewModel: ProfileViewModel by viewModels { viewModelFactory }
+    private var profileId: String? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile_edit
@@ -33,7 +36,10 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
         setupToolbar()
         observeProfile()
         binding.saveButton.setOnClickListener {
-            requireActivity().onBackPressed()
+            tryToGetProfile()?.let { profile ->
+                viewModel.updateProfile(profile)
+                requireActivity().onBackPressed()
+            }
         }
     }
 
@@ -48,6 +54,7 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
     private fun observeProfile() {
         lifecycleScope.launch {
             viewModel.getProfile().collect { profile ->
+                profileId = profile.id
                 fillFieldsWithProfile(profile)
             }
         }
@@ -59,6 +66,25 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
             academicGroupNumber.editText?.setText(profile.academicGroupNumber)
             email.editText?.setText(profile.email)
             phoneNumber.editText?.setText(profile.phoneNumber)
+        }
+    }
+
+    private fun tryToGetProfile(): Profile? {
+        val fullName = binding.fullName.checkField()
+        val academicGroupNumber = binding.academicGroupNumber.checkField()
+        val email = binding.email.checkField(matches = String::matchEmail)
+        val phoneNumber = binding.phoneNumber.checkField()
+
+        return if (fullName.isNotEmpty() &&
+            academicGroupNumber.isNotEmpty() &&
+            email.isNotEmpty() &&
+            phoneNumber.isNotEmpty()
+        ) {
+            profileId?.let { id ->
+                Profile(id, fullName, academicGroupNumber, email, phoneNumber)
+            }
+        } else {
+            null
         }
     }
 }
