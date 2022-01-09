@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "applications")
 data class ApplicationEntity(
     @PrimaryKey(autoGenerate = true)
-    val applicationId: String = "",
+    val applicationId: Long = 0,
     @ColumnInfo(name = "type")
     val type: String,
     @ColumnInfo(name = "full_name")
