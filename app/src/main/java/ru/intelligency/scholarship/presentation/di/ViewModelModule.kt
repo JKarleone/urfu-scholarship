@@ -2,6 +2,7 @@ package ru.intelligency.scholarship.presentation.di
 
 import dagger.Module
 import dagger.Provides
+import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsInteractor
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.domain.profile.ProfileInteractor
@@ -19,8 +20,11 @@ class ViewModelModule {
     }
 
     @Provides
-    fun provideNewDocumentViewModelFactory(interactor: PortfolioInteractor): NewDocumentViewModelFactory {
-        return NewDocumentViewModelFactory(interactor)
+    fun provideNewDocumentViewModelFactory(
+        interactor: PortfolioInteractor,
+        imageProvider: ImageProvider
+    ): NewDocumentViewModelFactory {
+        return NewDocumentViewModelFactory(interactor, imageProvider)
     }
 
     @Provides

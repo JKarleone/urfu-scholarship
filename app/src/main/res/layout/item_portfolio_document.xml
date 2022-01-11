@@ -19,6 +19,7 @@
             android:layout_width="57dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_portfolio_document_empty"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="contentDescription" />

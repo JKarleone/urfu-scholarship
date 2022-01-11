@@ -8,5 +8,6 @@ data class PortfolioDocument(
     val name: String = "",
     val description: String = "",
     val documentStatus: Status = Status.IN_WAITING,
-    val expirationDate: Long = Date().time
+    val expirationDate: Long = Date().time,
+    val fileName: String = ""
 )

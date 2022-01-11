@@ -1,10 +1,12 @@
 package ru.intelligency.scholarship.presentation.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.intelligency.scholarship.data.myapplications.ApplicationsRepositoryImpl
 import ru.intelligency.scholarship.data.portfolio.DocumentDao
 import ru.intelligency.scholarship.data.portfolio.DocumentsRepositoryImpl
+import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.data.profile.ProfileRepositoryImpl
 import ru.intelligency.scholarship.data.profile.UserSharedPreferences
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
@@ -31,5 +33,11 @@ class RepositoryModule {
     @Singleton
     fun provideProfileRepository(userSharedPreferences: UserSharedPreferences): ProfileRepository {
         return ProfileRepositoryImpl(userSharedPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageProvider(context: Context): ImageProvider {
+        return ImageProvider(context)
     }
 }

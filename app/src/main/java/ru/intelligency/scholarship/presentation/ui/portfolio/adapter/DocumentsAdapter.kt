@@ -3,6 +3,7 @@ package ru.intelligency.scholarship.presentation.ui.portfolio.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.databinding.ItemPortfolioDocumentBinding
 import ru.intelligency.scholarship.presentation.extensions.getStatusText
 import ru.intelligency.scholarship.presentation.extensions.setStatusIcon
@@ -10,13 +11,14 @@ import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocu
 
 class DocumentsAdapter(
     private var documents: List<PortfolioDocument>,
-    private val clickListener: OnDocumentItemClickListener
+    private val clickListener: OnDocumentItemClickListener,
+    private val imageProvider: ImageProvider
 ) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemPortfolioDocumentBinding.inflate(layoutInflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, imageProvider)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -37,7 +39,8 @@ class DocumentsAdapter(
     }
 
     class ViewHolder(
-        private val binding: ItemPortfolioDocumentBinding
+        private val binding: ItemPortfolioDocumentBinding,
+        private val imageProvider: ImageProvider
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PortfolioDocument) {
@@ -48,6 +51,9 @@ class DocumentsAdapter(
                 nameTextView.text = item.name
                 descriptionTextView.text = item.description
                 statusText.text = item.getStatusText(context)
+                if (item.fileName.isNotEmpty()) {
+                    portfolioDocumentImageView.setImageBitmap(imageProvider.getDocumentByName(item.fileName))
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
+import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.databinding.FragmentDocumentDetailsBinding
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.domain.portfolio.model.Document
@@ -30,6 +31,9 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
     private val viewModel: DocumentDetailsViewModel by viewModels {
         DocumentDetailsViewModelFactory(interactor, args.documentId)
     }
+
+    @Inject
+    lateinit var imageProvider: ImageProvider
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_document_details
@@ -87,6 +91,9 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
                         documentDateReceipt.text = viewModel.getModifiedReceiptDateString(document)
                         eventLocation.text = document.eventLocation
                         toolbar.title.text = document.title
+                        if (document.fileName.isNotEmpty()) {
+                            documentImage.setImageBitmap(imageProvider.getDocumentByName(document.fileName))
+                        }
                     }
                     setStatusMessage(document)
                 }

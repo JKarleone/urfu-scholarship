@@ -13,6 +13,7 @@
             layout="@layout/item_toolbar" />
 
         <TextView
+            android:id="@+id/subtitle"
             style="@style/SubtitleH1Gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,6 +21,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <ImageView
+            android:id="@+id/document_image"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="8dp"
+            app:layout_constraintBottom_toTopOf="@id/nextButton"
+            app:layout_constraintTop_toBottomOf="@id/subtitle" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"

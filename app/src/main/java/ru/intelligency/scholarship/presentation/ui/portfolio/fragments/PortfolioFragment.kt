@@ -1,5 +1,6 @@
 package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
+import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.databinding.FragmentPortfolioBinding
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
@@ -27,16 +29,18 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
     private val viewModel: PortfolioViewModel by viewModels {
         viewModelFactory
     }
-    private val adapter = DocumentsAdapter(listOf(), this)
+
+    @Inject
+    lateinit var imageProvider: ImageProvider
+    private val adapter by lazy { DocumentsAdapter(listOf(), this, imageProvider) }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_portfolio
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onAttach(context: Context) {
         (requireActivity().application as App).appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
