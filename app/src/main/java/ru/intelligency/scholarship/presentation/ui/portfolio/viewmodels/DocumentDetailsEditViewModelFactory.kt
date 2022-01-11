@@ -6,7 +6,7 @@ import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 
 class DocumentDetailsEditViewModelFactory(
     private val interactor: PortfolioInteractor,
-    private val id: String
+    private val id: Long
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

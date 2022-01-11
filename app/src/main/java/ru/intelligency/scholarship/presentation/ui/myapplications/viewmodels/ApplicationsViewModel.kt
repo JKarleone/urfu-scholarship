@@ -15,7 +15,7 @@ class ApplicationsViewModel(
     val applications: StateFlow<List<Application>> = applicationsInteractor.getApplications()
         .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
 
-    suspend fun getApplication(id: String): StateFlow<Application> {
+    suspend fun getApplication(id: Long): StateFlow<Application> {
         return applicationsInteractor.getApplication(id)
             .stateIn(viewModelScope)
     }
@@ -24,7 +24,7 @@ class ApplicationsViewModel(
         applicationsInteractor.saveApplication(application)
     }
 
-    fun deleteApplication(applicationId: String) {
+    fun deleteApplication(applicationId: Long) {
         applicationsInteractor.deleteApplication(applicationId)
     }
 }

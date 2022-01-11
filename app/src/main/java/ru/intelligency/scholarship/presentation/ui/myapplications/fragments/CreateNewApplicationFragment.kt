@@ -8,13 +8,12 @@ import androidx.fragment.app.viewModels
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.FragmentCreateNewApplicationBinding
 import ru.intelligency.scholarship.domain.myapplications.models.Application
-import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModel
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModelFactory
 import ru.intelligency.scholarship.presentation.utils.Status
-import java.time.LocalDate
+import java.util.Calendar
 import javax.inject.Inject
 
 class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBinding>() {
@@ -62,7 +61,7 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
                 totalMarksCount = binding.totalMarksCount.editText?.text.toString().toInt(),
                 excellentMarksCount = binding.excellentMarksCount.editText?.text.toString().toInt(),
                 applicationStatus = Status.IN_WAITING,
-                sendingDate = with(LocalDate.now()) { SimpleDate(dayOfMonth, monthValue, year) }
+                sendingDate = Calendar.getInstance().timeInMillis
             )
             viewModel.saveApplication(newApplication)
             requireActivity().onBackPressed()

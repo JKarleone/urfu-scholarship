@@ -3,13 +3,16 @@ package ru.intelligency.scholarship.data.portfolio
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import ru.intelligency.scholarship.presentation.utils.Status
 
 @Entity(tableName = "documents")
 data class DocumentEntity(
     @PrimaryKey(autoGenerate = true)
     val documentId: Long = 0,
-    @ColumnInfo(name = "name")
-    val name: String,
+    @ColumnInfo(name = "title")
+    val title: String,
+    @ColumnInfo(name = "document_status")
+    val documentStatus: Status,
     @ColumnInfo(name = "event_type")
     val eventType: String,
     @ColumnInfo(name = "event_status")

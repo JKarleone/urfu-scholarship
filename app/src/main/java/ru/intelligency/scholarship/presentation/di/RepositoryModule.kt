@@ -3,6 +3,7 @@ package ru.intelligency.scholarship.presentation.di
 import dagger.Module
 import dagger.Provides
 import ru.intelligency.scholarship.data.myapplications.ApplicationsRepositoryImpl
+import ru.intelligency.scholarship.data.portfolio.DocumentDao
 import ru.intelligency.scholarship.data.portfolio.DocumentsRepositoryImpl
 import ru.intelligency.scholarship.data.profile.ProfileRepositoryImpl
 import ru.intelligency.scholarship.data.profile.UserSharedPreferences
@@ -16,8 +17,8 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideDocumentsRepository(): DocumentsRepository {
-        return DocumentsRepositoryImpl()
+    fun provideDocumentsRepository(documentDao: DocumentDao): DocumentsRepository {
+        return DocumentsRepositoryImpl(documentDao)
     }
 
     @Provides

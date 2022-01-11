@@ -2,7 +2,6 @@ package ru.intelligency.scholarship.presentation.ui.portfolio.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -61,8 +60,10 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
         popup.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.delete -> {
-                    // TODO: delete from data source and get back to PortFolioFragment
-                    Toast.makeText(requireContext(), "Удаление", Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        viewModel.deleteDocument(args.documentId)
+                        requireActivity().onBackPressed()
+                    }
                 }
                 R.id.edit -> {
                     findNavController().navigate(
@@ -79,14 +80,16 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
     private fun collectDocument() {
         lifecycleScope.launch {
             viewModel.document.collect { document ->
-                with(binding) {
-                    eventType.text = document.eventType
-                    eventStatus.text = document.eventStatus
-                    documentDateReceipt.text = viewModel.getModifiedReceiptDateString(document)
-                    eventLocation.text = document.eventLocation
-                    toolbar.title.text = document.title
+                document?.let {
+                    with(binding) {
+                        eventType.text = document.eventType
+                        eventStatus.text = document.eventStatus
+                        documentDateReceipt.text = viewModel.getModifiedReceiptDateString(document)
+                        eventLocation.text = document.eventLocation
+                        toolbar.title.text = document.title
+                    }
+                    setStatusMessage(document)
                 }
-                setStatusMessage(document)
             }
         }
     }

@@ -80,7 +80,7 @@
         tools:layout="@layout/fragment_document_details">
         <argument
             android:name="documentId"
-            app:argType="string" />
+            app:argType="long" />
         <action
             android:id="@+id/action_documentDetailsFragment_to_documentDetailsEditFragment"
             app:destination="@id/documentDetailsEditFragment" />
@@ -92,7 +92,10 @@
         tools:layout="@layout/fragment_document_details_edit">
         <argument
             android:name="documentId"
-            app:argType="string" />
+            app:argType="long" />
+        <action
+            android:id="@+id/action_documentDetailsEditFragment_to_navigation_portfolio"
+            app:destination="@id/navigation_portfolio" />
     </fragment>
     <fragment
         android:id="@+id/applicationDetailsFragment"
@@ -101,7 +104,7 @@
         tools:layout="@layout/fragment_application_details">
         <argument
             android:name="applicationId"
-            app:argType="string" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/profileEditFragment"

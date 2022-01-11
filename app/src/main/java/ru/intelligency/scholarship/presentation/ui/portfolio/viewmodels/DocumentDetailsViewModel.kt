@@ -10,13 +10,17 @@ import ru.intelligency.scholarship.domain.portfolio.model.Document
 
 class DocumentDetailsViewModel(
     private val interactor: PortfolioInteractor,
-    id: String
+    id: Long
 ) : ViewModel() {
 
-    val document: StateFlow<Document> = interactor.getDocument(id)
+    val document: StateFlow<Document?> = interactor.getDocument(id)
         .stateIn(viewModelScope, SharingStarted.Lazily, Document())
 
     fun getModifiedReceiptDateString(document: Document): String {
         return interactor.getModifiedReceiptDate(document.dateOfReceipt)
+    }
+
+    suspend fun deleteDocument(documentId: Long) {
+        interactor.deleteDocument(documentId)
     }
 }

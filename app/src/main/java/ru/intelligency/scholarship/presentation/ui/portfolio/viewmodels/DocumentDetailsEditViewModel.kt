@@ -10,10 +10,10 @@ import ru.intelligency.scholarship.domain.portfolio.model.Document
 
 class DocumentDetailsEditViewModel(
     private val interactor: PortfolioInteractor,
-    id: String
+    id: Long
 ) : ViewModel() {
 
-    val document: StateFlow<Document> = interactor.getDocument(id)
+    val document: StateFlow<Document?> = interactor.getDocument(id)
         .stateIn(viewModelScope, SharingStarted.Lazily, Document())
 
     fun getDefaultEventTypes(): List<String> {
@@ -24,7 +24,15 @@ class DocumentDetailsEditViewModel(
         return interactor.getDefaultEventStatuses()
     }
 
-    fun saveDocument(document: Document) {
-        interactor.saveDocument(document)
+    suspend fun createDocument(document: Document) {
+        interactor.createDocument(document)
+    }
+
+    suspend fun updateDocument(document: Document) {
+        interactor.updateDocument(document)
+    }
+
+    suspend fun deleteDocument(documentId: Long) {
+        interactor.deleteDocument(documentId)
     }
 }

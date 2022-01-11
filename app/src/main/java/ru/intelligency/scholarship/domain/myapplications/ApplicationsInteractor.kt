@@ -11,7 +11,7 @@ class ApplicationsInteractor(
         return repository.getApplications()
     }
 
-    fun getApplication(id: String): Flow<Application> {
+    fun getApplication(id: Long): Flow<Application> {
         return repository.getApplicationById(id)
     }
 
@@ -19,7 +19,7 @@ class ApplicationsInteractor(
         repository.saveApplication(application)
     }
 
-    fun deleteApplication(applicationId: String) {
+    fun deleteApplication(applicationId: Long) {
         repository.deleteApplication(applicationId)
     }
 }

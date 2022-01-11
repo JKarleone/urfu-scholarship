@@ -5,14 +5,15 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.FragmentScanDocumentInfoBinding
 import ru.intelligency.scholarship.domain.portfolio.model.Document
-import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
-import java.time.LocalDate
+import ru.intelligency.scholarship.presentation.extensions.toDate
 import javax.inject.Inject
 
 class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>() {
@@ -99,15 +100,18 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
             val eventStatusInput = binding.eventStatusInputLayout.editText?.text.toString()
             val eventStatus =
                 if (eventStatusExposed == eventStatusesItems.last()) eventStatusInput else eventStatusExposed
+            val dateOfReceipt = documentDateInputLayout.editText?.text.toString().toDate()
             val newDoc = Document(
                 title = documentNameInputLayout.editText?.text.toString(),
                 eventType = eventType,
                 eventStatus = eventStatus,
-                dateOfReceipt = with(LocalDate.now()) { SimpleDate(dayOfMonth, monthValue, year) },
+                dateOfReceipt = dateOfReceipt,
                 eventLocation = binding.eventPlaceInputLayout.editText?.text.toString()
             )
-            viewModel.saveDocument(newDoc)
+            lifecycleScope.launch {
+                viewModel.createDocument(newDoc)
+                findNavController().navigate(R.id.action_scanDocumentInfoFragment_to_navigation_portfolio)
+            }
         }
-        findNavController().navigate(R.id.action_scanDocumentInfoFragment_to_navigation_portfolio)
     }
 }

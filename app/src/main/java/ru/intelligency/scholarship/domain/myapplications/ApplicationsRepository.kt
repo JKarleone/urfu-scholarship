@@ -7,9 +7,9 @@ interface ApplicationsRepository {
 
     fun getApplications(): Flow<List<Application>>
 
-    fun getApplicationById(id: String): Flow<Application>
+    fun getApplicationById(id: Long): Flow<Application>
 
     fun saveApplication(application: Application)
 
-    fun deleteApplication(applicationId: String)
+    fun deleteApplication(applicationId: Long)
 }

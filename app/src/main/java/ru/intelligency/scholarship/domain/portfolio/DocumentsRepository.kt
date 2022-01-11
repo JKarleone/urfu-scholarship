@@ -7,13 +7,15 @@ interface DocumentsRepository {
 
     fun getAllDocuments(): Flow<List<Document>>
 
-    fun getDocument(id: String): Flow<Document>
+    fun getDocument(id: Long): Flow<Document?>
 
     fun getDefaultEventTypes(): List<String>
 
     fun getDefaultEventStatuses(): List<String>
 
-    fun saveDocument(document: Document)
+    suspend fun createDocument(document: Document)
 
-    fun deleteDocument(documentId: String)
+    suspend fun updateDocument(document: Document)
+
+    suspend fun deleteDocument(documentId: Long)
 }

@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.map
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.domain.portfolio.extensions.toPortfolioDocument
 import ru.intelligency.scholarship.domain.portfolio.model.Document
-import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
+import java.util.Calendar
 
 class PortfolioInteractor(
     private val documentsRepository: DocumentsRepository,
@@ -21,15 +21,19 @@ class PortfolioInteractor(
         }
     }
 
-    fun getDocument(id: String): Flow<Document> {
+    fun getDocument(id: Long): Flow<Document?> {
         return documentsRepository.getDocument(id)
     }
 
-    fun getModifiedReceiptDate(receiptDate: SimpleDate): String {
+    fun getModifiedReceiptDate(receiptDate: Long): String {
+        val date = Calendar.getInstance().apply {
+            timeInMillis = receiptDate
+            set(Calendar.YEAR, get(Calendar.YEAR) + 2)
+        }
         return context.getString(
             R.string.document_details_receipt_date,
             receiptDate.getStringDate(),
-            SimpleDate(receiptDate.day, receiptDate.month, receiptDate.year + 2).getStringDate()
+            date.timeInMillis.getStringDate()
         )
     }
 
@@ -41,11 +45,15 @@ class PortfolioInteractor(
         return documentsRepository.getDefaultEventStatuses()
     }
 
-    fun saveDocument(document: Document) {
-        documentsRepository.saveDocument(document)
+    suspend fun createDocument(document: Document) {
+        documentsRepository.createDocument(document)
     }
 
-    fun deleteDocument(id: String) {
-        documentsRepository.deleteDocument(id)
+    suspend fun updateDocument(document: Document) {
+        documentsRepository.updateDocument(document)
+    }
+
+    suspend fun deleteDocument(documentId: Long) {
+        documentsRepository.deleteDocument(documentId)
     }
 }

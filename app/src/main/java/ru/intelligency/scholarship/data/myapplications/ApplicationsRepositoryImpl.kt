@@ -4,14 +4,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
 import ru.intelligency.scholarship.domain.myapplications.models.Application
-import ru.intelligency.scholarship.domain.portfolio.model.SimpleDate
 import ru.intelligency.scholarship.presentation.utils.Status
+import java.util.Date
 
 class ApplicationsRepositoryImpl : ApplicationsRepository {
 
     private val applications = mutableListOf(
         Application(
-            id = "0",
+            id = 0,
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
             fullName = "Пупкин Вася Олегович",
             academicGroupNumber = "РИ-480022",
@@ -20,10 +20,10 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
             totalMarksCount = 25,
             excellentMarksCount = 1,
             applicationStatus = Status.IN_WAITING,
-            sendingDate = SimpleDate(1, 12, 2021)
+            sendingDate = Date().time
         ),
         Application(
-            id = "1",
+            id = 1,
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
             fullName = "Пупкин Вася Олегович",
             academicGroupNumber = "РИ-480022",
@@ -32,10 +32,10 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
             totalMarksCount = 25,
             excellentMarksCount = 1,
             applicationStatus = Status.REJECTED,
-            sendingDate = SimpleDate(1, 12, 2021)
+            sendingDate = Date().time
         ),
         Application(
-            id = "2",
+            id = 2,
             scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
             fullName = "Пупкин Вася Олегович",
             academicGroupNumber = "РИ-480022",
@@ -44,7 +44,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
             totalMarksCount = 25,
             excellentMarksCount = 1,
             applicationStatus = Status.ACCEPTED,
-            sendingDate = SimpleDate(1, 12, 2021)
+            sendingDate = Date().time
         ),
     )
 
@@ -54,7 +54,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
         }
     }
 
-    override fun getApplicationById(id: String): Flow<Application> {
+    override fun getApplicationById(id: Long): Flow<Application> {
         return flow {
             emit(applications.first { it.id == id })
         }
@@ -64,7 +64,7 @@ class ApplicationsRepositoryImpl : ApplicationsRepository {
         applications.add(application)
     }
 
-    override fun deleteApplication(applicationId: String) {
+    override fun deleteApplication(applicationId: Long) {
         applications.first { it.id == applicationId }.apply {
             applications.remove(this)
         }

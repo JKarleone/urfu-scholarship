@@ -16,7 +16,7 @@ class NewDocumentViewModel(
         return interactor.getDefaultEventStatuses()
     }
 
-    fun saveDocument(document: Document) {
-        interactor.saveDocument(document)
+    suspend fun createDocument(document: Document) {
+        interactor.createDocument(document)
     }
 }

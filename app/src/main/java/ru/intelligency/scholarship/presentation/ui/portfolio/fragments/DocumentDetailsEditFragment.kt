@@ -6,15 +6,18 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.FragmentDocumentDetailsEditBinding
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
+import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
+import ru.intelligency.scholarship.presentation.extensions.toDate
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModel
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModelFactory
 import javax.inject.Inject
@@ -51,11 +54,10 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
                 }
             }
             saveButton.setOnClickListener {
-                // TODO: validate fields
-                // TODO: navigate if fields are ok
+                saveDocument()
             }
             deleteButton.setOnClickListener {
-                // TODO: delete from data source and get back to PortFolioFragment
+                deleteDocument()
             }
 
         }
@@ -103,12 +105,14 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
     private fun fillFields() {
         lifecycleScope.launch {
             viewModel.document.collect { document ->
-                with(binding) {
-                    documentNameInputLayout.editText?.setText(document.title)
-                    documentDateInputLayout.editText?.setText(document.dateOfReceipt.getStringDate())
-                    eventPlaceInputLayout.editText?.setText(document.eventLocation)
-                    setEventType(document.eventType)
-                    setEventStatus(document.eventStatus)
+                document?.let {
+                    with(binding) {
+                        documentNameInputLayout.editText?.setText(document.title)
+                        documentDateInputLayout.editText?.setText(document.dateOfReceipt.getStringDate())
+                        eventPlaceInputLayout.editText?.setText(document.eventLocation)
+                        setEventType(document.eventType)
+                        setEventStatus(document.eventStatus)
+                    }
                 }
             }
         }
@@ -139,6 +143,38 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
                 eventStatusInputLayout.visibility = View.VISIBLE
                 eventStatusInputLayout.editText?.setText(eventStatus)
             }
+        }
+    }
+
+    private fun saveDocument() {
+        val title = binding.documentNameInputLayout.editText?.text.toString()
+        val eventTypeExposed = binding.eventTypeInputLayoutExposed.editText?.text.toString()
+        val eventTypeInput = binding.eventTypeInputLayout.editText?.text.toString()
+        val eventType =
+            if (eventTypeExposed == defaultEventTypes.last()) eventTypeInput else eventTypeExposed
+        val eventStatusExposed = binding.eventStatusInputLayoutExposed.editText?.text.toString()
+        val eventStatusInput = binding.eventStatusInputLayout.editText?.text.toString()
+        val eventStatus =
+            if (eventStatusExposed == defaultEventStatuses.last()) eventStatusInput else eventStatusExposed
+        val dateOfReceipt = binding.documentDateInputLayout.editText?.text.toString().toDate()
+        val newDoc = Document(
+            id = args.documentId,
+            title = title,
+            eventType = eventType,
+            eventStatus = eventStatus,
+            dateOfReceipt = dateOfReceipt,
+            eventLocation = binding.eventPlaceInputLayout.editText?.text.toString()
+        )
+        lifecycleScope.launch {
+            viewModel.updateDocument(newDoc)
+            requireActivity().onBackPressed()
+        }
+    }
+
+    private fun deleteDocument() {
+        lifecycleScope.launch {
+            viewModel.deleteDocument(args.documentId)
+            findNavController().navigate(R.id.action_documentDetailsEditFragment_to_navigation_portfolio)
         }
     }
 }

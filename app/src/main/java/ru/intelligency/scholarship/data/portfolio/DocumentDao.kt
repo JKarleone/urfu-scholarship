@@ -1,7 +1,6 @@
 package ru.intelligency.scholarship.data.portfolio
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,14 +14,14 @@ interface DocumentDao {
     fun getAllDocuments(): Flow<List<DocumentEntity>>
 
     @Query("SELECT * FROM documents WHERE documentId == :documentId")
-    suspend fun getDocumentById(documentId: Long): DocumentEntity
+    fun getDocumentById(documentId: Long): Flow<DocumentEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDocument(document: DocumentEntity)
+    suspend fun insertDocument(document: DocumentEntity): Long
 
     @Update
-    suspend fun updateDocument(document: DocumentEntity)
+    suspend fun updateDocument(document: DocumentEntity): Int
 
-    @Delete
-    suspend fun deleteDocument(document: DocumentEntity)
+    @Query("DELETE FROM documents WHERE documentId == :documentId")
+    suspend fun deleteDocument(documentId: Long)
 }
