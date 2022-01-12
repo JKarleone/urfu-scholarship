@@ -52,11 +52,15 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
 
     private fun getApplicationAndFillFields() {
         lifecycleScope.launch {
-            viewModel.getApplication(args.applicationId).collect { application ->
-                fillFieldsWithApplication(application)
-                binding.cancelButton.setOnClickListener {
-                    viewModel.deleteApplication(application.id)
-                    requireActivity().onBackPressed()
+            viewModel.getApplication(args.applicationId).collect { applicationWithDocs ->
+                applicationWithDocs?.let { appWithDocs ->
+                    fillFieldsWithApplication(appWithDocs.application)
+                    binding.cancelButton.setOnClickListener {
+                        lifecycleScope.launch {
+                            viewModel.deleteApplication(applicationWithDocs.application.id)
+                            requireActivity().onBackPressed()
+                        }
+                    }
                 }
             }
         }

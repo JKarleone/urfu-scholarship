@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.databinding.FragmentCreateNewApplicationBinding
 import ru.intelligency.scholarship.domain.myapplications.models.Application
@@ -52,19 +54,22 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
 
     private fun bindSaveButtonClick() {
         binding.saveButton.setOnClickListener {
-            val newApplication = Application(
-                scholarshipType = binding.scholarshipType.editText?.text.toString(),
-                fullName = binding.fullName.editText?.text.toString(),
-                academicGroupNumber = binding.academicGroupNumber.editText?.text.toString(),
-                specialityCode = binding.specialityCode.editText?.text.toString(),
-                specialityName = binding.specialityName.editText?.text.toString(),
-                totalMarksCount = binding.totalMarksCount.editText?.text.toString().toInt(),
-                excellentMarksCount = binding.excellentMarksCount.editText?.text.toString().toInt(),
-                applicationStatus = Status.IN_WAITING,
-                sendingDate = Calendar.getInstance().timeInMillis
-            )
-            viewModel.saveApplication(newApplication)
-            requireActivity().onBackPressed()
+            lifecycleScope.launch {
+                val newApplication = Application(
+                    scholarshipType = binding.scholarshipType.editText?.text.toString(),
+                    fullName = binding.fullName.editText?.text.toString(),
+                    academicGroupNumber = binding.academicGroupNumber.editText?.text.toString(),
+                    specialityCode = binding.specialityCode.editText?.text.toString(),
+                    specialityName = binding.specialityName.editText?.text.toString(),
+                    totalMarksCount = binding.totalMarksCount.editText?.text.toString().toInt(),
+                    excellentMarksCount = binding.excellentMarksCount.editText?.text.toString()
+                        .toInt(),
+                    applicationStatus = Status.IN_WAITING,
+                    sendingDate = Calendar.getInstance().timeInMillis
+                )
+                viewModel.saveApplication(newApplication)
+                requireActivity().onBackPressed()
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package ru.intelligency.scholarship.domain.myapplications
 
 import kotlinx.coroutines.flow.Flow
 import ru.intelligency.scholarship.domain.myapplications.models.Application
+import ru.intelligency.scholarship.domain.myapplications.models.ApplicationWithDocuments
 
 class ApplicationsInteractor(
     private val repository: ApplicationsRepository
@@ -11,15 +12,15 @@ class ApplicationsInteractor(
         return repository.getApplications()
     }
 
-    fun getApplication(id: Long): Flow<Application> {
-        return repository.getApplicationById(id)
+    fun getApplication(applicationId: Long): Flow<ApplicationWithDocuments?> {
+        return repository.getApplicationById(applicationId)
     }
 
-    fun saveApplication(application: Application) {
-        repository.saveApplication(application)
+    suspend fun saveApplication(application: Application) {
+        repository.createApplication(application)
     }
 
-    fun deleteApplication(applicationId: Long) {
+    suspend fun deleteApplication(applicationId: Long) {
         repository.deleteApplication(applicationId)
     }
 }

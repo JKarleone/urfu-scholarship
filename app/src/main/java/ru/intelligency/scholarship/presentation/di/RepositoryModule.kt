@@ -3,6 +3,8 @@ package ru.intelligency.scholarship.presentation.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import ru.intelligency.scholarship.data.myapplications.ApplicationDao
+import ru.intelligency.scholarship.data.myapplications.ApplicationDocumentCrossRefDao
 import ru.intelligency.scholarship.data.myapplications.ApplicationsRepositoryImpl
 import ru.intelligency.scholarship.data.portfolio.DocumentDao
 import ru.intelligency.scholarship.data.portfolio.DocumentsRepositoryImpl
@@ -25,8 +27,11 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideApplicationsRepository(): ApplicationsRepository {
-        return ApplicationsRepositoryImpl()
+    fun provideApplicationsRepository(
+        applicationDao: ApplicationDao,
+        applicationWithDocumentsRefDao: ApplicationDocumentCrossRefDao
+    ): ApplicationsRepository {
+        return ApplicationsRepositoryImpl(applicationDao, applicationWithDocumentsRefDao)
     }
 
     @Provides

@@ -62,6 +62,8 @@ class MyApplicationsFragment : BaseFragment<FragmentMyApplicationsBinding>(),
     }
 
     override fun onApplicationItemClick(application: Application) {
+        Toast.makeText(requireContext(), "Application id: ${application.id}", Toast.LENGTH_SHORT)
+            .show()
         findNavController().navigate(
             MyApplicationsFragmentDirections.actionNavigationMyApplicationsToApplicationDetailsFragment(
                 application.id

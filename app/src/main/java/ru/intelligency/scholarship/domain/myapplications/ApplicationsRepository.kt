@@ -2,14 +2,17 @@ package ru.intelligency.scholarship.domain.myapplications
 
 import kotlinx.coroutines.flow.Flow
 import ru.intelligency.scholarship.domain.myapplications.models.Application
+import ru.intelligency.scholarship.domain.myapplications.models.ApplicationWithDocuments
 
 interface ApplicationsRepository {
 
     fun getApplications(): Flow<List<Application>>
 
-    fun getApplicationById(id: Long): Flow<Application>
+    fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocuments?>
 
-    fun saveApplication(application: Application)
+    suspend fun createApplication(application: Application)
 
-    fun deleteApplication(applicationId: Long)
+    suspend fun updateApplication(application: Application)
+
+    suspend fun deleteApplication(applicationId: Long)
 }

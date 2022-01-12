@@ -1,10 +1,10 @@
 package ru.intelligency.scholarship.data.myapplications
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,11 +14,14 @@ interface ApplicationDao {
     fun getAllApplications(): Flow<List<ApplicationEntity>>
 
     @Query("SELECT * FROM applications WHERE applicationId == :applicationId")
-    suspend fun getApplicationById(applicationId: Long): ApplicationWithDocumentsEntity
+    fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocumentsEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertApplication(application: ApplicationEntity)
+    suspend fun createApplication(application: ApplicationEntity)
 
-    @Delete
-    suspend fun deleteApplication(application: ApplicationEntity)
+    @Update
+    suspend fun updateApplication(applicationEntity: ApplicationEntity)
+
+    @Query("DELETE FROM applications WHERE applicationId == :applicationId")
+    suspend fun deleteApplication(applicationId: Long)
 }

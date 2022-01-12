@@ -1,72 +1,39 @@
 package ru.intelligency.scholarship.data.myapplications
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import ru.intelligency.scholarship.data.extensions.toDomainModel
+import ru.intelligency.scholarship.data.extensions.toEntity
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
 import ru.intelligency.scholarship.domain.myapplications.models.Application
-import ru.intelligency.scholarship.presentation.utils.Status
-import java.util.Date
+import ru.intelligency.scholarship.domain.myapplications.models.ApplicationWithDocuments
 
-class ApplicationsRepositoryImpl : ApplicationsRepository {
-
-    private val applications = mutableListOf(
-        Application(
-            id = 0,
-            scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
-            fullName = "Пупкин Вася Олегович",
-            academicGroupNumber = "РИ-480022",
-            specialityCode = "09.03.04",
-            specialityName = "Программная инженерия",
-            totalMarksCount = 25,
-            excellentMarksCount = 1,
-            applicationStatus = Status.IN_WAITING,
-            sendingDate = Date().time
-        ),
-        Application(
-            id = 1,
-            scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
-            fullName = "Пупкин Вася Олегович",
-            academicGroupNumber = "РИ-480022",
-            specialityCode = "09.03.04",
-            specialityName = "Программная инженерия",
-            totalMarksCount = 25,
-            excellentMarksCount = 1,
-            applicationStatus = Status.REJECTED,
-            sendingDate = Date().time
-        ),
-        Application(
-            id = 2,
-            scholarshipType = "Стипендия Правительства РФ по приоритетным направлениям",
-            fullName = "Пупкин Вася Олегович",
-            academicGroupNumber = "РИ-480022",
-            specialityCode = "09.03.04",
-            specialityName = "Программная инженерия",
-            totalMarksCount = 25,
-            excellentMarksCount = 1,
-            applicationStatus = Status.ACCEPTED,
-            sendingDate = Date().time
-        ),
-    )
+class ApplicationsRepositoryImpl(
+    private val applicationDao: ApplicationDao,
+    private val applicationWithDocumentsDao: ApplicationDocumentCrossRefDao
+) : ApplicationsRepository {
 
     override fun getApplications(): Flow<List<Application>> {
-        return flow {
-            emit(applications)
-        }
+        return applicationDao.getAllApplications()
+            .map { list ->
+                list.map { applicationEntity -> applicationEntity.toDomainModel() }
+            }
     }
 
-    override fun getApplicationById(id: Long): Flow<Application> {
-        return flow {
-            emit(applications.first { it.id == id })
-        }
+    override fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocuments?> {
+        return applicationDao.getApplicationById(applicationId).map { it?.toDomainModel() }
     }
 
-    override fun saveApplication(application: Application) {
-        applications.add(application)
+    override suspend fun createApplication(application: Application) {
+        applicationDao.createApplication(application.toEntity())
     }
 
-    override fun deleteApplication(applicationId: Long) {
-        applications.first { it.id == applicationId }.apply {
-            applications.remove(this)
-        }
+    override suspend fun updateApplication(application: Application) {
+        applicationDao.updateApplication(application.toEntity())
+    }
+
+    override suspend fun deleteApplication(applicationId: Long) {
+        applicationDao.deleteApplication(applicationId)
+        applicationWithDocumentsDao.deleteApplicationWithId(applicationId)
     }
 }

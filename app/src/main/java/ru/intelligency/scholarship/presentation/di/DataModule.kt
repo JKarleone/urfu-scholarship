@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import ru.intelligency.scholarship.data.AppDatabase
 import ru.intelligency.scholarship.data.myapplications.ApplicationDao
+import ru.intelligency.scholarship.data.myapplications.ApplicationDocumentCrossRefDao
 import ru.intelligency.scholarship.data.portfolio.DocumentDao
 import ru.intelligency.scholarship.data.profile.UserSharedPreferences
 
@@ -29,6 +30,11 @@ class DataModule {
     @Provides
     fun provideDocumentDao(db: AppDatabase): DocumentDao {
         return db.documentDao()
+    }
+
+    @Provides
+    fun provideApplicationDocumentCrossRefDao(db: AppDatabase): ApplicationDocumentCrossRefDao {
+        return db.applicationDocumentCrossRefDao()
     }
 
     @Provides
