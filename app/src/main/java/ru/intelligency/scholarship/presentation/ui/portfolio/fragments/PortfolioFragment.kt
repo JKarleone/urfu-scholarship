@@ -52,7 +52,6 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
             viewModel.documents.collect { list ->
                 adapter.submitData(list)
             }
-            viewModel.documents
         }
     }
 

@@ -1,5 +1,6 @@
 package ru.intelligency.scholarship.presentation.ui.myapplications.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -8,15 +9,20 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.intelligency.scholarship.R
+import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.databinding.FragmentApplicationDetailsBinding
 import ru.intelligency.scholarship.domain.myapplications.models.Application
+import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModel
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModelFactory
+import ru.intelligency.scholarship.presentation.ui.portfolio.adapter.DocumentsAdapter
+import ru.intelligency.scholarship.presentation.ui.portfolio.extensions.toPortfolioDocument
 import ru.intelligency.scholarship.presentation.utils.Status
 import javax.inject.Inject
 
@@ -28,10 +34,13 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
     lateinit var viewModelFactory: ApplicationsViewModelFactory
     private val viewModel: ApplicationsViewModel by viewModels { viewModelFactory }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    @Inject
+    lateinit var imageProvider: ImageProvider
+    private val adapter by lazy { DocumentsAdapter(listOf(), null, imageProvider) }
 
+    override fun onAttach(context: Context) {
         (requireActivity().application as App).appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun getLayoutId(): Int {
@@ -40,6 +49,7 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupToolbar()
+        setupRecyclerView()
         getApplicationAndFillFields()
     }
 
@@ -61,6 +71,7 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
                             requireActivity().onBackPressed()
                         }
                     }
+                    adapter.submitData(appWithDocs.documents.map(Document::toPortfolioDocument))
                 }
             }
         }
@@ -117,5 +128,10 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
             rootLayout.background =
                 ContextCompat.getDrawable(requireContext(), bgRes)
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.documentsRecyclerView.adapter = adapter
+        binding.documentsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 }

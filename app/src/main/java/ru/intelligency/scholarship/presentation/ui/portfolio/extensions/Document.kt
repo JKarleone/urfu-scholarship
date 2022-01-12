@@ -1,4 +1,4 @@
-package ru.intelligency.scholarship.domain.portfolio.extensions
+package ru.intelligency.scholarship.presentation.ui.portfolio.extensions
 
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument

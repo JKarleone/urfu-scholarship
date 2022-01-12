@@ -4,9 +4,9 @@ import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ru.intelligency.scholarship.R
-import ru.intelligency.scholarship.domain.portfolio.extensions.toPortfolioDocument
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
+import ru.intelligency.scholarship.presentation.ui.portfolio.extensions.toPortfolioDocument
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
 import java.util.Calendar
 

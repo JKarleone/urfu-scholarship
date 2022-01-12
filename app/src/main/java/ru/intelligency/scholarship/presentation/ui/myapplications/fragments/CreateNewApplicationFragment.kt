@@ -50,6 +50,10 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
             setAdapter(typesAdapter)
         }
         bindSaveButtonClick()
+        with(binding.toolbar) {
+            optionsButton.visibility = View.INVISIBLE
+            backButton.setOnClickListener { requireActivity().onBackPressed() }
+        }
     }
 
     private fun bindSaveButtonClick() {

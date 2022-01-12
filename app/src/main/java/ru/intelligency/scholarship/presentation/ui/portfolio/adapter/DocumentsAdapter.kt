@@ -11,7 +11,7 @@ import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocu
 
 class DocumentsAdapter(
     private var documents: List<PortfolioDocument>,
-    private val clickListener: OnDocumentItemClickListener,
+    private val clickListener: OnDocumentItemClickListener?,
     private val imageProvider: ImageProvider
 ) : RecyclerView.Adapter<DocumentsAdapter.ViewHolder>() {
 
@@ -25,7 +25,7 @@ class DocumentsAdapter(
         val currentDocument = documents[position]
         holder.bind(currentDocument)
         holder.itemView.setOnClickListener {
-            clickListener.onDocumentItemClick(currentDocument)
+            clickListener?.onDocumentItemClick(currentDocument)
         }
     }
 

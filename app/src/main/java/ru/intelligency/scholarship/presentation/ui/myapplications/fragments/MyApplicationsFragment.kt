@@ -2,7 +2,6 @@ package ru.intelligency.scholarship.presentation.ui.myapplications.fragments
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -41,7 +40,6 @@ class MyApplicationsFragment : BaseFragment<FragmentMyApplicationsBinding>(),
         setupRecyclerView()
         observeApplications()
         binding.addNewAppButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Click", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_navigation_my_applications_to_createNewApplicationFragment)
         }
     }
@@ -62,8 +60,6 @@ class MyApplicationsFragment : BaseFragment<FragmentMyApplicationsBinding>(),
     }
 
     override fun onApplicationItemClick(application: Application) {
-        Toast.makeText(requireContext(), "Application id: ${application.id}", Toast.LENGTH_SHORT)
-            .show()
         findNavController().navigate(
             MyApplicationsFragmentDirections.actionNavigationMyApplicationsToApplicationDetailsFragment(
                 application.id
