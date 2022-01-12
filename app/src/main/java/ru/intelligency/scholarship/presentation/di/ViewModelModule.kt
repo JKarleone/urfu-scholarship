@@ -28,8 +28,11 @@ class ViewModelModule {
     }
 
     @Provides
-    fun provideApplicationsViewModelFactory(interactor: ApplicationsInteractor): ApplicationsViewModelFactory {
-        return ApplicationsViewModelFactory(interactor)
+    fun provideApplicationsViewModelFactory(
+        applicationsInteractor: ApplicationsInteractor,
+        portfolioInteractor: PortfolioInteractor
+    ): ApplicationsViewModelFactory {
+        return ApplicationsViewModelFactory(applicationsInteractor, portfolioInteractor)
     }
 
     @Provides

@@ -2,12 +2,9 @@ package ru.intelligency.scholarship.domain.portfolio
 
 import android.content.Context
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
-import ru.intelligency.scholarship.presentation.ui.portfolio.extensions.toPortfolioDocument
-import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
 import java.util.Calendar
 
 class PortfolioInteractor(
@@ -15,10 +12,8 @@ class PortfolioInteractor(
     private val context: Context
 ) {
 
-    fun getAllDocuments(): Flow<List<PortfolioDocument>> {
-        return documentsRepository.getAllDocuments().map { list ->
-            list.map { document -> document.toPortfolioDocument() }
-        }
+    fun getAllDocuments(): Flow<List<Document>> {
+        return documentsRepository.getAllDocuments()
     }
 
     fun getDocument(id: Long): Flow<Document?> {

@@ -153,6 +153,18 @@
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    style="@style/Title18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/application_documents_to_link" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/documentsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/saveButton"
                     android:layout_width="match_parent"
