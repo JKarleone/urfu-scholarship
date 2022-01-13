@@ -10,7 +10,7 @@ interface ApplicationsRepository {
 
     fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocuments?>
 
-    suspend fun createApplication(application: Application)
+    suspend fun createApplication(application: Application, documentIds: List<Long>)
 
     suspend fun updateApplication(application: Application)
 

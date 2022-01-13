@@ -24,8 +24,13 @@ class ApplicationsRepositoryImpl(
         return applicationDao.getApplicationById(applicationId).map { it?.toDomainModel() }
     }
 
-    override suspend fun createApplication(application: Application) {
-        applicationDao.createApplication(application.toEntity())
+    override suspend fun createApplication(application: Application, documentIds: List<Long>) {
+        val applicationId = applicationDao.createApplication(application.toEntity())
+        documentIds.forEach { documentId ->
+            applicationWithDocumentsDao.insertApplicationDocumentCrossRef(
+                ApplicationDocumentCrossRef(applicationId, documentId)
+            )
+        }
     }
 
     override suspend fun updateApplication(application: Application) {

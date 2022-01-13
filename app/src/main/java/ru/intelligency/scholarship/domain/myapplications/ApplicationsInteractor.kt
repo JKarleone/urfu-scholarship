@@ -16,8 +16,8 @@ class ApplicationsInteractor(
         return repository.getApplicationById(applicationId)
     }
 
-    suspend fun saveApplication(application: Application) {
-        repository.createApplication(application)
+    suspend fun saveApplication(application: Application, documentIds: List<Long>) {
+        repository.createApplication(application, documentIds)
     }
 
     suspend fun deleteApplication(applicationId: Long) {

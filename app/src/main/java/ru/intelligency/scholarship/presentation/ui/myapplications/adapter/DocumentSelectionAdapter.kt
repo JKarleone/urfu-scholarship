@@ -14,7 +14,7 @@ class DocumentSelectionAdapter(
     private val imageProvider: ImageProvider
 ) : RecyclerView.Adapter<DocumentSelectionAdapter.ViewHolder>() {
 
-    val selectedDocsIndexes = mutableListOf<Long>()
+    val selectedDocsIds = mutableListOf<Long>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -28,9 +28,9 @@ class DocumentSelectionAdapter(
             val currentDocument = documents[position]
             val isSelected = currentDocument.isSelected
             if (isSelected) {
-                selectedDocsIndexes.remove(currentDocument.id)
+                selectedDocsIds.remove(currentDocument.id)
             } else {
-                selectedDocsIndexes.add(currentDocument.id)
+                selectedDocsIds.add(currentDocument.id)
             }
             documents[position].isSelected = !isSelected
             notifyItemChanged(position)

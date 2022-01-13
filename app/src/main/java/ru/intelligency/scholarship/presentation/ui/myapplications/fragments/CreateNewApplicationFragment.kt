@@ -71,7 +71,7 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
                     applicationStatus = Status.IN_WAITING,
                     sendingDate = Calendar.getInstance().timeInMillis
                 )
-                viewModel.saveApplication(newApplication)
+                viewModel.saveApplication(newApplication, adapter.selectedDocsIds)
                 requireActivity().onBackPressed()
             }
         }

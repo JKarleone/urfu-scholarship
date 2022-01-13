@@ -64,6 +64,7 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
         lifecycleScope.launch {
             viewModel.getApplication(args.applicationId).collect { applicationWithDocs ->
                 applicationWithDocs?.let { appWithDocs ->
+                    adapter.submitData(appWithDocs.documents.map(Document::toPortfolioDocument))
                     fillFieldsWithApplication(appWithDocs.application)
                     binding.cancelButton.setOnClickListener {
                         lifecycleScope.launch {
@@ -71,7 +72,6 @@ class ApplicationDetailsFragment : BaseFragment<FragmentApplicationDetailsBindin
                             requireActivity().onBackPressed()
                         }
                     }
-                    adapter.submitData(appWithDocs.documents.map(Document::toPortfolioDocument))
                 }
             }
         }

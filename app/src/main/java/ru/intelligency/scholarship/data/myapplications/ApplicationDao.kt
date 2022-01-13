@@ -17,7 +17,7 @@ interface ApplicationDao {
     fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocumentsEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun createApplication(application: ApplicationEntity)
+    suspend fun createApplication(application: ApplicationEntity): Long
 
     @Update
     suspend fun updateApplication(applicationEntity: ApplicationEntity)
