@@ -79,7 +79,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signInButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height"
             android:text="@string/sign_in"
             app:cornerRadius="8dp"
             android:textAppearance="@style/ButtonText"

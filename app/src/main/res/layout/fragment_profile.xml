@@ -32,7 +32,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/editButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="20dp"
             android:text="@string/profile_edit"
             android:textAppearance="@style/ButtonText"
@@ -112,7 +112,7 @@
             android:id="@+id/logoutButton"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
             android:text="@string/profile_log_out"

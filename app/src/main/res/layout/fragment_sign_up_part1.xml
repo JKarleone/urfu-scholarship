@@ -101,7 +101,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextStepButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height"
             android:text="@string/next_step"
             android:textAppearance="@style/ButtonText"
             app:cornerRadius="8dp"

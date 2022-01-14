@@ -98,7 +98,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginTop="20dp"
                 android:text="@string/profile_edit"
                 android:textAppearance="@style/ButtonText"

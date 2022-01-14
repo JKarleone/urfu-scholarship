@@ -76,6 +76,7 @@
                     android:id="@+id/eventTypeInputLayout"
                     style="@style/TextInputLayout"
                     android:visibility="gone"
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:visibility="visible">
@@ -109,6 +110,7 @@
                     android:id="@+id/eventStatusInputLayout"
                     style="@style/TextInputLayout"
                     android:visibility="gone"
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:visibility="visible">
@@ -159,8 +161,8 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/saveButton"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/document_save"
                     android:textAppearance="@style/ButtonText"
