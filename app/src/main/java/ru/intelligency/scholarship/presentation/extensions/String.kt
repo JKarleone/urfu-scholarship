@@ -8,6 +8,16 @@ fun String.matchEmail(): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
+fun String.matchDate(): Boolean {
+    val format = SimpleDateFormat("dd.MM.yyyy")
+    return try {
+        format.parse(this)
+        true
+    } catch (e: Exception) {
+        false
+    }
+}
+
 fun String.toDate(): Long {
     val format = SimpleDateFormat("dd.MM.yyyy")
     return try {

@@ -13,6 +13,8 @@ import ru.intelligency.scholarship.databinding.FragmentScanDocumentInfoBinding
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.extensions.checkField
+import ru.intelligency.scholarship.presentation.extensions.matchDate
 import ru.intelligency.scholarship.presentation.extensions.toDate
 import javax.inject.Inject
 
@@ -47,7 +49,12 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
                 }
             }
             saveButton.setOnClickListener {
-                checkInfoAndNavigate()
+                tryToGetDocument()?.let { document ->
+                    lifecycleScope.launch {
+                        viewModel.createDocument(document)
+                        findNavController().navigate(R.id.action_scanDocumentInfoFragment_to_navigation_portfolio)
+                    }
+                }
             }
         }
         setupAdaptersForAutoCompleteViews()
@@ -90,27 +97,35 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
         }
     }
 
-    private fun checkInfoAndNavigate() {
+    private fun tryToGetDocument(): Document? {
         with(binding) {
-            val eventTypeExposed = binding.eventTypeInputLayoutExposed.editText?.text.toString()
-            val eventTypeInput = binding.eventTypeInputLayout.editText?.text.toString()
+            val title = documentNameInputLayout.checkField()
+            val eventTypeExposed = binding.eventTypeInputLayoutExposed.checkField()
+            val eventTypeInput = binding.eventTypeInputLayout.checkField()
             val eventType =
                 if (eventTypeExposed == eventTypesItems.last()) eventTypeInput else eventTypeExposed
-            val eventStatusExposed = binding.eventStatusInputLayoutExposed.editText?.text.toString()
-            val eventStatusInput = binding.eventStatusInputLayout.editText?.text.toString()
+            val eventStatusExposed = binding.eventStatusInputLayoutExposed.checkField()
+            val eventStatusInput = binding.eventStatusInputLayout.checkField()
             val eventStatus =
                 if (eventStatusExposed == eventStatusesItems.last()) eventStatusInput else eventStatusExposed
-            val dateOfReceipt = documentDateInputLayout.editText?.text.toString().toDate()
-            val newDoc = Document(
-                title = documentNameInputLayout.editText?.text.toString(),
-                eventType = eventType,
-                eventStatus = eventStatus,
-                dateOfReceipt = dateOfReceipt,
-                eventLocation = binding.eventPlaceInputLayout.editText?.text.toString()
-            )
-            lifecycleScope.launch {
-                viewModel.createDocument(newDoc)
-                findNavController().navigate(R.id.action_scanDocumentInfoFragment_to_navigation_portfolio)
+            val dateOfReceipt = documentDateInputLayout.checkField(matches = String::matchDate)
+            val eventLocation = binding.eventPlaceInputLayout.checkField()
+
+            return if (title.isNotEmpty() &&
+                eventType.isNotEmpty() &&
+                eventStatus.isNotEmpty() &&
+                dateOfReceipt.isNotEmpty() &&
+                eventLocation.isNotEmpty()
+            ) {
+                Document(
+                    title = title,
+                    eventType = eventType,
+                    eventStatus = eventStatus,
+                    dateOfReceipt = dateOfReceipt.toDate(),
+                    eventLocation = eventLocation
+                )
+            } else {
+                null
             }
         }
     }
