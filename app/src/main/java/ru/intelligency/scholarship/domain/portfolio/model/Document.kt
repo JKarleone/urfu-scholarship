@@ -4,7 +4,7 @@ import ru.intelligency.scholarship.presentation.utils.Status
 import java.util.Date
 
 data class Document(
-    val id: Long = 0,
+    val id: Int = 0,
     val title: String = "",
     val documentStatus: Status = Status.IN_WAITING,
     val eventType: String = "",

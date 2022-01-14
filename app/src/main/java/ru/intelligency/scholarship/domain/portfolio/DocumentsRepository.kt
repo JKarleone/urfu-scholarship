@@ -7,7 +7,7 @@ interface DocumentsRepository {
 
     fun getAllDocuments(): Flow<List<Document>>
 
-    fun getDocument(id: Long): Flow<Document?>
+    fun getDocument(documentId: Int): Flow<Document?>
 
     fun getDefaultEventTypes(): List<String>
 
@@ -17,5 +17,5 @@ interface DocumentsRepository {
 
     suspend fun updateDocument(document: Document)
 
-    suspend fun deleteDocument(documentId: Long)
+    suspend fun deleteDocument(documentId: Int)
 }

@@ -9,7 +9,7 @@ class UserSharedPreferences(context: Context) {
     private val sharedPrefs = context.getSharedPreferences(KEY_PREFS, Context.MODE_PRIVATE)
 
     fun getUserData(): Profile {
-        val id = sharedPrefs.getString(KEY_ID, "")!!
+        val id = sharedPrefs.getInt(KEY_ID, 0)
         val fullName = sharedPrefs.getString(KEY_FULL_NAME, "")!!
         val academicGroupNumber = sharedPrefs.getString(KEY_ACADEMIC_GROUP_NUMBER, "")!!
         val email = sharedPrefs.getString(KEY_EMAIL, "")!!
@@ -20,7 +20,7 @@ class UserSharedPreferences(context: Context) {
 
     fun updateUserData(profile: Profile) {
         sharedPrefs.edit(true) {
-            putString(KEY_ID, profile.id)
+            putInt(KEY_ID, profile.id)
             putString(KEY_FULL_NAME, profile.fullName)
             putString(KEY_ACADEMIC_GROUP_NUMBER, profile.academicGroupNumber)
             putString(KEY_EMAIL, profile.email)
@@ -30,7 +30,7 @@ class UserSharedPreferences(context: Context) {
 
     fun clearUserData() {
         sharedPrefs.edit(true) {
-            putString(KEY_ID, "")
+            putInt(KEY_ID, 0)
             putString(KEY_FULL_NAME, "")
             putString(KEY_ACADEMIC_GROUP_NUMBER, "")
             putString(KEY_EMAIL, "")

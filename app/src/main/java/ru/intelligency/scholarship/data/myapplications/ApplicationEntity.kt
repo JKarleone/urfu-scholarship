@@ -8,7 +8,7 @@ import ru.intelligency.scholarship.presentation.utils.Status
 @Entity(tableName = "applications")
 data class ApplicationEntity(
     @PrimaryKey(autoGenerate = true)
-    val applicationId: Long = 0,
+    val applicationId: Int = 0,
     @ColumnInfo(name = "application_status")
     val applicationStatus: Status,
     @ColumnInfo(name = "scholarship_type")

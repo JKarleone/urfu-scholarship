@@ -19,8 +19,8 @@ class DocumentsRepositoryImpl(
                 list.map { docEntity -> docEntity.toDomainModel() }
             }
 
-    override fun getDocument(id: Long): Flow<Document?> {
-        return documentDao.getDocumentById(id).map { it?.toDomainModel() }
+    override fun getDocument(documentId: Int): Flow<Document?> {
+        return documentDao.getDocumentById(documentId).map { it?.toDomainModel() }
     }
 
     override fun getDefaultEventTypes(): List<String> {
@@ -39,7 +39,7 @@ class DocumentsRepositoryImpl(
         documentDao.updateDocument(document.toEntity())
     }
 
-    override suspend fun deleteDocument(documentId: Long) {
+    override suspend fun deleteDocument(documentId: Int) {
         documentDao.deleteDocument(documentId)
         applicationDocumentCrossRefDao.deleteDocumentWithId(documentId)
     }

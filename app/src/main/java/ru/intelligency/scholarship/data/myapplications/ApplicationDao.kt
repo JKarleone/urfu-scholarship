@@ -14,7 +14,7 @@ interface ApplicationDao {
     fun getAllApplications(): Flow<List<ApplicationEntity>>
 
     @Query("SELECT * FROM applications WHERE applicationId == :applicationId")
-    fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocumentsEntity?>
+    fun getApplicationById(applicationId: Int): Flow<ApplicationWithDocumentsEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createApplication(application: ApplicationEntity): Long
@@ -23,5 +23,5 @@ interface ApplicationDao {
     suspend fun updateApplication(applicationEntity: ApplicationEntity)
 
     @Query("DELETE FROM applications WHERE applicationId == :applicationId")
-    suspend fun deleteApplication(applicationId: Long)
+    suspend fun deleteApplication(applicationId: Int)
 }

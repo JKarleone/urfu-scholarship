@@ -25,16 +25,16 @@ class ApplicationsViewModel(
         .map { list -> list.map { it.toApplicationDocument() } }
         .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
 
-    suspend fun getApplication(id: Long): StateFlow<ApplicationWithDocuments?> {
-        return applicationsInteractor.getApplication(id)
+    suspend fun getApplication(applicationId: Int): StateFlow<ApplicationWithDocuments?> {
+        return applicationsInteractor.getApplication(applicationId)
             .stateIn(viewModelScope)
     }
 
-    suspend fun saveApplication(application: Application, documentIds: List<Long>) {
+    suspend fun saveApplication(application: Application, documentIds: List<Int>) {
         applicationsInteractor.saveApplication(application, documentIds)
     }
 
-    suspend fun deleteApplication(applicationId: Long) {
+    suspend fun deleteApplication(applicationId: Int) {
         applicationsInteractor.deleteApplication(applicationId)
     }
 }

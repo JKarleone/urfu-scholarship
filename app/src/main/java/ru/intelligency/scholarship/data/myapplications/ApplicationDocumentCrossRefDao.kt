@@ -15,8 +15,8 @@ interface ApplicationDocumentCrossRefDao {
     suspend fun deleteApplicationDocumentCrossRef(applicationDocumentCrossRef: ApplicationDocumentCrossRef)
 
     @Query("DELETE FROM applicationdocumentcrossref WHERE applicationId == :applicationId")
-    suspend fun deleteApplicationWithId(applicationId: Long)
+    suspend fun deleteApplicationWithId(applicationId: Int)
 
     @Query("DELETE FROM applicationdocumentcrossref WHERE documentId == :documentId")
-    suspend fun deleteDocumentWithId(documentId: Long)
+    suspend fun deleteDocumentWithId(documentId: Int)
 }

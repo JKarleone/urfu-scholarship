@@ -20,15 +20,15 @@ class ApplicationsRepositoryImpl(
             }
     }
 
-    override fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocuments?> {
+    override fun getApplicationById(applicationId: Int): Flow<ApplicationWithDocuments?> {
         return applicationDao.getApplicationById(applicationId).map { it?.toDomainModel() }
     }
 
-    override suspend fun createApplication(application: Application, documentIds: List<Long>) {
+    override suspend fun createApplication(application: Application, documentIds: List<Int>) {
         val applicationId = applicationDao.createApplication(application.toEntity())
         documentIds.forEach { documentId ->
             applicationWithDocumentsDao.insertApplicationDocumentCrossRef(
-                ApplicationDocumentCrossRef(applicationId, documentId)
+                ApplicationDocumentCrossRef(applicationId.toInt(), documentId)
             )
         }
     }
@@ -37,7 +37,7 @@ class ApplicationsRepositoryImpl(
         applicationDao.updateApplication(application.toEntity())
     }
 
-    override suspend fun deleteApplication(applicationId: Long) {
+    override suspend fun deleteApplication(applicationId: Int) {
         applicationDao.deleteApplication(applicationId)
         applicationWithDocumentsDao.deleteApplicationWithId(applicationId)
     }

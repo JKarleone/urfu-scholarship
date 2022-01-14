@@ -14,7 +14,7 @@ class DocumentSelectionAdapter(
     private val imageProvider: ImageProvider
 ) : RecyclerView.Adapter<DocumentSelectionAdapter.ViewHolder>() {
 
-    val selectedDocsIds = mutableListOf<Long>()
+    val selectedDocsIds = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

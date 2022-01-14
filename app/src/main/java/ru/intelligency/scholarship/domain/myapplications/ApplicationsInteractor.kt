@@ -12,15 +12,15 @@ class ApplicationsInteractor(
         return repository.getApplications()
     }
 
-    fun getApplication(applicationId: Long): Flow<ApplicationWithDocuments?> {
+    fun getApplication(applicationId: Int): Flow<ApplicationWithDocuments?> {
         return repository.getApplicationById(applicationId)
     }
 
-    suspend fun saveApplication(application: Application, documentIds: List<Long>) {
+    suspend fun saveApplication(application: Application, documentIds: List<Int>) {
         repository.createApplication(application, documentIds)
     }
 
-    suspend fun deleteApplication(applicationId: Long) {
+    suspend fun deleteApplication(applicationId: Int) {
         repository.deleteApplication(applicationId)
     }
 }

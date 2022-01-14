@@ -20,7 +20,7 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
     @Inject
     lateinit var viewModelFactory: ProfileViewModelFactory
     private val viewModel: ProfileViewModel by viewModels { viewModelFactory }
-    private var profileId: String? = null
+    private var profileId: Int? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile_edit

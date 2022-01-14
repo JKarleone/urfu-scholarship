@@ -14,14 +14,14 @@ interface DocumentDao {
     fun getAllDocuments(): Flow<List<DocumentEntity>>
 
     @Query("SELECT * FROM documents WHERE documentId == :documentId")
-    fun getDocumentById(documentId: Long): Flow<DocumentEntity?>
+    fun getDocumentById(documentId: Int): Flow<DocumentEntity?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDocument(document: DocumentEntity): Long
 
     @Update
-    suspend fun updateDocument(document: DocumentEntity): Int
+    suspend fun updateDocument(document: DocumentEntity)
 
     @Query("DELETE FROM documents WHERE documentId == :documentId")
-    suspend fun deleteDocument(documentId: Long)
+    suspend fun deleteDocument(documentId: Int)
 }

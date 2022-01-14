@@ -16,8 +16,8 @@ class PortfolioInteractor(
         return documentsRepository.getAllDocuments()
     }
 
-    fun getDocument(id: Long): Flow<Document?> {
-        return documentsRepository.getDocument(id)
+    fun getDocument(documentId: Int): Flow<Document?> {
+        return documentsRepository.getDocument(documentId)
     }
 
     fun getModifiedReceiptDate(receiptDate: Long): String {
@@ -48,7 +48,7 @@ class PortfolioInteractor(
         documentsRepository.updateDocument(document)
     }
 
-    suspend fun deleteDocument(documentId: Long) {
+    suspend fun deleteDocument(documentId: Int) {
         documentsRepository.deleteDocument(documentId)
     }
 }

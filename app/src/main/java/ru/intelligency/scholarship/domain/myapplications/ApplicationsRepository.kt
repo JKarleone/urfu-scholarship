@@ -8,11 +8,11 @@ interface ApplicationsRepository {
 
     fun getApplications(): Flow<List<Application>>
 
-    fun getApplicationById(applicationId: Long): Flow<ApplicationWithDocuments?>
+    fun getApplicationById(applicationId: Int): Flow<ApplicationWithDocuments?>
 
-    suspend fun createApplication(application: Application, documentIds: List<Long>)
+    suspend fun createApplication(application: Application, documentIds: List<Int>)
 
     suspend fun updateApplication(application: Application)
 
-    suspend fun deleteApplication(applicationId: Long)
+    suspend fun deleteApplication(applicationId: Int)
 }

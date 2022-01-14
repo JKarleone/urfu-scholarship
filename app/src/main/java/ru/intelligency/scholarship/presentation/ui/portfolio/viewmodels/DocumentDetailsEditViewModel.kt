@@ -10,7 +10,7 @@ import ru.intelligency.scholarship.domain.portfolio.model.Document
 
 class DocumentDetailsEditViewModel(
     private val interactor: PortfolioInteractor,
-    id: Long
+    id: Int
 ) : ViewModel() {
 
     val document: StateFlow<Document?> = interactor.getDocument(id)
@@ -32,7 +32,7 @@ class DocumentDetailsEditViewModel(
         interactor.updateDocument(document)
     }
 
-    suspend fun deleteDocument(documentId: Long) {
+    suspend fun deleteDocument(documentId: Int) {
         interactor.deleteDocument(documentId)
     }
 }

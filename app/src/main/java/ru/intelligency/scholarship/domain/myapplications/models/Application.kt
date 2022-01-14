@@ -3,7 +3,7 @@ package ru.intelligency.scholarship.domain.myapplications.models
 import ru.intelligency.scholarship.presentation.utils.Status
 
 data class Application(
-    val id: Long = 0,
+    val id: Int = 0,
     val scholarshipType: String,
     val fullName: String,
     val academicGroupNumber: String,

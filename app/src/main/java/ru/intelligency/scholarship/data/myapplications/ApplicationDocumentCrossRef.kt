@@ -4,6 +4,6 @@ import androidx.room.Entity
 
 @Entity(primaryKeys = ["applicationId", "documentId"])
 data class ApplicationDocumentCrossRef(
-    val applicationId: Long,
-    val documentId: Long
+    val applicationId: Int,
+    val documentId: Int
 )
