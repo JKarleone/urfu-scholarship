@@ -100,16 +100,16 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
     private fun tryToGetDocument(): Document? {
         with(binding) {
             val title = documentNameInputLayout.checkField()
-            val eventTypeExposed = binding.eventTypeInputLayoutExposed.checkField()
-            val eventTypeInput = binding.eventTypeInputLayout.checkField()
+            val eventTypeExposed = eventTypeInputLayoutExposed.checkField()
+            val eventTypeInput = eventTypeInputLayout.checkField()
             val eventType =
                 if (eventTypeExposed == eventTypesItems.last()) eventTypeInput else eventTypeExposed
-            val eventStatusExposed = binding.eventStatusInputLayoutExposed.checkField()
-            val eventStatusInput = binding.eventStatusInputLayout.checkField()
+            val eventStatusExposed = eventStatusInputLayoutExposed.checkField()
+            val eventStatusInput = eventStatusInputLayout.checkField()
             val eventStatus =
                 if (eventStatusExposed == eventStatusesItems.last()) eventStatusInput else eventStatusExposed
             val dateOfReceipt = documentDateInputLayout.checkField(matches = String::matchDate)
-            val eventLocation = binding.eventPlaceInputLayout.checkField()
+            val eventLocation = eventPlaceInputLayout.checkField()
 
             return if (title.isNotEmpty() &&
                 eventType.isNotEmpty() &&
