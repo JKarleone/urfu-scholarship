@@ -7,6 +7,8 @@ interface DocumentsRepository {
 
     fun getAllDocuments(): Flow<List<Document>>
 
+    suspend fun updateDocumentsStatuses()
+
     fun getDocument(documentId: Int): Flow<Document?>
 
     fun getDefaultEventTypes(): List<String>

@@ -9,10 +9,14 @@ import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.presentation.ui.portfolio.extensions.toPortfolioDocument
 
 class PortfolioViewModel(
-    portfolioInteractor: PortfolioInteractor
+    private val portfolioInteractor: PortfolioInteractor
 ) : ViewModel() {
 
     val documents = portfolioInteractor.getAllDocuments()
         .map { list -> list.map { it.toPortfolioDocument() } }
         .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+
+    suspend fun updateDocumentsStatuses() {
+        portfolioInteractor.updateDocumentsStatuses()
+    }
 }

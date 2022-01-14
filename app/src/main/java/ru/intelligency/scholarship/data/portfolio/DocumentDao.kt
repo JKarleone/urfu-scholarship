@@ -11,10 +11,16 @@ import kotlinx.coroutines.flow.Flow
 interface DocumentDao {
 
     @Query("SELECT * FROM documents")
-    fun getAllDocuments(): Flow<List<DocumentEntity>>
+    fun getAllDocumentsFlow(): Flow<List<DocumentEntity>>
+
+    @Query("SELECT * FROM documents")
+    suspend fun getAllDocuments(): List<DocumentEntity>
 
     @Query("SELECT * FROM documents WHERE documentId == :documentId")
-    fun getDocumentById(documentId: Int): Flow<DocumentEntity?>
+    fun getDocumentFlowById(documentId: Int): Flow<DocumentEntity?>
+
+    @Query("SELECT * FROM documents WHERE documentId == :documentId")
+    suspend fun getDocumentById(documentId: Int): DocumentEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDocument(document: DocumentEntity): Long

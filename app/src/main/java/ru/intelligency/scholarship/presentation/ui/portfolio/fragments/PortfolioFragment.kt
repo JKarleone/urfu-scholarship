@@ -55,6 +55,13 @@ class PortfolioFragment : BaseFragment<FragmentPortfolioBinding>(),
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            viewModel.updateDocumentsStatuses()
+        }
+    }
+
     private fun setupRecyclerView() {
         binding.documentsRecyclerView.adapter = adapter
         binding.documentsRecyclerView.layoutManager = LinearLayoutManager(requireContext())

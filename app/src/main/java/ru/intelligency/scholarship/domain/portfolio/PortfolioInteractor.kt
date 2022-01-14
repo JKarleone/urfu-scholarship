@@ -16,6 +16,10 @@ class PortfolioInteractor(
         return documentsRepository.getAllDocuments()
     }
 
+    suspend fun updateDocumentsStatuses() {
+        documentsRepository.updateDocumentsStatuses()
+    }
+
     fun getDocument(documentId: Int): Flow<Document?> {
         return documentsRepository.getDocument(documentId)
     }

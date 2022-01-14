@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import ru.intelligency.scholarship.data.myapplications.ApplicationDao
 import ru.intelligency.scholarship.data.myapplications.ApplicationDocumentCrossRefDao
+import ru.intelligency.scholarship.data.myapplications.ApplicationsApi
 import ru.intelligency.scholarship.data.myapplications.ApplicationsRepositoryImpl
 import ru.intelligency.scholarship.data.portfolio.DocumentDao
 import ru.intelligency.scholarship.data.portfolio.DocumentsApi
@@ -42,9 +43,16 @@ class RepositoryModule {
     @Singleton
     fun provideApplicationsRepository(
         applicationDao: ApplicationDao,
-        applicationWithDocumentsRefDao: ApplicationDocumentCrossRefDao
+        applicationWithDocumentsRefDao: ApplicationDocumentCrossRefDao,
+        applicationsApi: ApplicationsApi,
+        userSharedPreferences: UserSharedPreferences
     ): ApplicationsRepository {
-        return ApplicationsRepositoryImpl(applicationDao, applicationWithDocumentsRefDao)
+        return ApplicationsRepositoryImpl(
+            applicationDao,
+            applicationWithDocumentsRefDao,
+            applicationsApi,
+            userSharedPreferences
+        )
     }
 
     @Provides

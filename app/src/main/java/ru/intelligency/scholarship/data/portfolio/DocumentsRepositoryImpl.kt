@@ -9,6 +9,7 @@ import ru.intelligency.scholarship.data.extensions.toCreateRequestModel
 import ru.intelligency.scholarship.data.extensions.toDomainModel
 import ru.intelligency.scholarship.data.extensions.toEntity
 import ru.intelligency.scholarship.data.extensions.toRequestModel
+import ru.intelligency.scholarship.data.extensions.toStatus
 import ru.intelligency.scholarship.data.myapplications.ApplicationDocumentCrossRefDao
 import ru.intelligency.scholarship.data.profile.UserSharedPreferences
 import ru.intelligency.scholarship.domain.portfolio.DocumentsRepository
@@ -23,13 +24,34 @@ class DocumentsRepositoryImpl(
 ) : DocumentsRepository {
 
     override fun getAllDocuments(): Flow<List<Document>> =
-        documentDao.getAllDocuments()
+        documentDao.getAllDocumentsFlow()
             .map { list ->
                 list.map { docEntity -> docEntity.toDomainModel() }
             }
 
+    override suspend fun updateDocumentsStatuses() {
+        val response = documentsApi.getDocumentsStatuses()
+        if (response.isSuccessful) {
+            response.body()?.forEach { (id, status) ->
+                documentDao.getDocumentById(id)?.let { document ->
+                    val statusEnum = status.toStatus()
+                    val docWithNewStatus = document.copy(documentStatus = statusEnum)
+                    documentDao.updateDocument(docWithNewStatus)
+                }
+            }
+            val allIds = response.body()?.map { it.documentId }
+            documentDao.getAllDocuments().forEach { documentEntity ->
+                allIds?.let { ids ->
+                    if (documentEntity.documentId !in ids) {
+                        documentDao.deleteDocument(documentEntity.documentId)
+                    }
+                }
+            }
+        }
+    }
+
     override fun getDocument(documentId: Int): Flow<Document?> {
-        return documentDao.getDocumentById(documentId).map { it?.toDomainModel() }
+        return documentDao.getDocumentFlowById(documentId).map { it?.toDomainModel() }
     }
 
     override fun getDefaultEventTypes(): List<String> {
@@ -47,6 +69,7 @@ class DocumentsRepositoryImpl(
         val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("img", file.name, requestFile)
         documentsApi.postDocument(document.toCreateRequestModel(fullName))
+        documentsApi.postDocumentImage(body)
     }
 
     override suspend fun updateDocument(document: Document) {

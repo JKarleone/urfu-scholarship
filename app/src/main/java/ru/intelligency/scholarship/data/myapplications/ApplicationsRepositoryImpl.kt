@@ -2,15 +2,19 @@ package ru.intelligency.scholarship.data.myapplications
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import ru.intelligency.scholarship.data.extensions.toCreateRequestModel
 import ru.intelligency.scholarship.data.extensions.toDomainModel
 import ru.intelligency.scholarship.data.extensions.toEntity
+import ru.intelligency.scholarship.data.profile.UserSharedPreferences
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
 import ru.intelligency.scholarship.domain.myapplications.models.Application
 import ru.intelligency.scholarship.domain.myapplications.models.ApplicationWithDocuments
 
 class ApplicationsRepositoryImpl(
     private val applicationDao: ApplicationDao,
-    private val applicationWithDocumentsDao: ApplicationDocumentCrossRefDao
+    private val applicationWithDocumentsDao: ApplicationDocumentCrossRefDao,
+    private val applicationsApi: ApplicationsApi,
+    private val userSharedPreferences: UserSharedPreferences
 ) : ApplicationsRepository {
 
     override fun getApplications(): Flow<List<Application>> {
@@ -31,6 +35,9 @@ class ApplicationsRepositoryImpl(
                 ApplicationDocumentCrossRef(applicationId.toInt(), documentId)
             )
         }
+        applicationsApi.postApplication(
+            application.toCreateRequestModel(documentIds, userSharedPreferences.getUserData().id)
+        )
     }
 
     override suspend fun updateApplication(application: Application) {
