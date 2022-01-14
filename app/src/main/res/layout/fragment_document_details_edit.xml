@@ -70,6 +70,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/eventTypeInputLayout"
                     style="@style/TextInputLayout"
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -105,6 +106,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/eventStatusInputLayout"
                     style="@style/TextInputLayout"
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
