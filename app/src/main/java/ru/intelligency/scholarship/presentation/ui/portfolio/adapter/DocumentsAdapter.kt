@@ -3,9 +3,11 @@ package ru.intelligency.scholarship.presentation.ui.portfolio.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.databinding.ItemPortfolioDocumentBinding
 import ru.intelligency.scholarship.presentation.extensions.getStatusText
+import ru.intelligency.scholarship.presentation.extensions.isExpired
 import ru.intelligency.scholarship.presentation.extensions.setStatusIcon
 import ru.intelligency.scholarship.presentation.ui.portfolio.model.PortfolioDocument
 
@@ -47,10 +49,15 @@ class DocumentsAdapter(
             val context = binding.root.context
 
             with(binding) {
-                statusImageView.setStatusIcon(item.documentStatus)
+                if (item.dateOfReceipt.isExpired()) {
+                    statusImageView.setImageResource(R.drawable.ic_rejected)
+                    statusText.setText(R.string.document_rejected)
+                } else {
+                    statusImageView.setStatusIcon(item.documentStatus)
+                    statusText.text = item.getStatusText(context)
+                }
                 nameTextView.text = item.name
                 descriptionTextView.text = item.description
-                statusText.text = item.getStatusText(context)
                 if (item.fileName.isNotEmpty()) {
                     portfolioDocumentImageView.setImageBitmap(imageProvider.getDocumentByName(item.fileName))
                 }

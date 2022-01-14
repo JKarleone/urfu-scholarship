@@ -12,7 +12,7 @@ fun PortfolioDocument.getStatusText(context: Context): String {
             context.getString(
                 R.string.portfolio_profile_expiration_date,
                 Calendar.getInstance().apply {
-                    timeInMillis = expirationDate
+                    timeInMillis = dateOfReceipt
                     set(Calendar.YEAR, get(Calendar.YEAR) + 2)
                 }.timeInMillis.getStringDate()
             )

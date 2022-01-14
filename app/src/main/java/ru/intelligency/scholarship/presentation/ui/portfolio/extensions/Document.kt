@@ -9,7 +9,7 @@ fun Document.toPortfolioDocument(): PortfolioDocument {
         name = title,
         description = "$eventType, $eventStatus",
         documentStatus = documentStatus,
-        expirationDate = dateOfReceipt,
+        dateOfReceipt = dateOfReceipt,
         fileName = fileName
     )
 }

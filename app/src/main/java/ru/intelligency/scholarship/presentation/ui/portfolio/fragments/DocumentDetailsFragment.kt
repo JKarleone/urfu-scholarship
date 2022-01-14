@@ -17,6 +17,7 @@ import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.extensions.isExpired
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsViewModel
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsViewModelFactory
 import ru.intelligency.scholarship.presentation.utils.Status
@@ -95,7 +96,11 @@ class DocumentDetailsFragment : BaseFragment<FragmentDocumentDetailsBinding>() {
                             documentImage.setImageBitmap(imageProvider.getDocumentByName(document.fileName))
                         }
                     }
-                    setStatusMessage(document)
+                    if (document.dateOfReceipt.isExpired()) {
+                        setStatusMessageRejected()
+                    } else {
+                        setStatusMessage(document)
+                    }
                 }
             }
         }

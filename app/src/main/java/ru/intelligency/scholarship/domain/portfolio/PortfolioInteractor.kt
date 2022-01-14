@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.map
 import ru.intelligency.scholarship.R
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
+import ru.intelligency.scholarship.presentation.extensions.isExpired
 import ru.intelligency.scholarship.presentation.utils.Status
 import java.util.Calendar
 
@@ -21,6 +22,7 @@ class PortfolioInteractor(
     fun getAllAcceptedDocuments(): Flow<List<Document>> {
         return documentsRepository.getAllDocuments()
             .map { list -> list.filter { it.documentStatus == Status.ACCEPTED } }
+            .map { list -> list.filter { !it.dateOfReceipt.isExpired() } }
     }
 
     suspend fun updateDocumentsStatuses() {
