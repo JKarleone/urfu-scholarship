@@ -39,7 +39,7 @@ class ApplicationsRepositoryImpl(
             applicationDao.getAllApplications().forEach { applicationEntity ->
                 allIds?.let { ids ->
                     if (applicationEntity.applicationId !in ids) {
-                        deleteApplication(applicationEntity.applicationId)
+                        deleteLocalApplication(applicationEntity.applicationId)
                     }
                 }
             }
@@ -67,6 +67,11 @@ class ApplicationsRepositoryImpl(
     }
 
     override suspend fun deleteApplication(applicationId: Int) {
+        deleteLocalApplication(applicationId)
+        applicationsApi.deleteApplication(applicationId)
+    }
+
+    private suspend fun deleteLocalApplication(applicationId: Int) {
         applicationDao.deleteApplication(applicationId)
         applicationWithDocumentsDao.deleteApplicationWithId(applicationId)
     }
