@@ -1,5 +1,6 @@
 package ru.intelligency.scholarship.presentation.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import ru.intelligency.scholarship.databinding.FragmentProfileBinding
 import ru.intelligency.scholarship.domain.profile.models.Profile
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.entrance.EntranceActivity
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
@@ -34,6 +36,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         observeProfile()
         binding.editButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_profileEditFragment)
+        }
+        binding.logoutButton.setOnClickListener {
+            val intent = Intent(requireContext(), EntranceActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 
