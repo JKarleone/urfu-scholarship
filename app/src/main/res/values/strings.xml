@@ -63,6 +63,7 @@
     <string name="hint_event_type">Тип мероприятия</string>
     <string name="hint_event_status">Статус мероприятия</string>
     <string name="hint_document_date">Дата получения документа</string>
+    <string name="hint_date">ДД.ММ.ГГГГ</string>
     <string name="hint_event_place">Место проведения мероприятия</string>
 
     <string name="document_accepted">Документ верифицирован</string>
