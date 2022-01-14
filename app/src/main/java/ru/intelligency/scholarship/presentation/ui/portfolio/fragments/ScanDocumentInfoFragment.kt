@@ -14,7 +14,9 @@ import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.extensions.checkField
+import ru.intelligency.scholarship.presentation.extensions.hideKeyboard
 import ru.intelligency.scholarship.presentation.extensions.matchDate
+import ru.intelligency.scholarship.presentation.extensions.matchDateByExpiration
 import ru.intelligency.scholarship.presentation.extensions.toDate
 import javax.inject.Inject
 
@@ -109,19 +111,26 @@ class ScanDocumentInfoFragment : BaseFragment<FragmentScanDocumentInfoBinding>()
             val eventStatus =
                 if (eventStatusExposed == eventStatusesItems.last()) eventStatusInput else eventStatusExposed
             val dateOfReceipt = documentDateInputLayout.checkField(matches = String::matchDate)
+            val dateOfReceipt1 = documentDateInputLayout.checkField(
+                errorMessage = R.string.document_is_already_expired,
+                matches = String::matchDateByExpiration
+            )
             val eventLocation = eventPlaceInputLayout.checkField()
+
+            hideKeyboard()
 
             return if (title.isNotEmpty() &&
                 eventType.isNotEmpty() &&
                 eventStatus.isNotEmpty() &&
                 dateOfReceipt.isNotEmpty() &&
+                dateOfReceipt1.isNotEmpty() &&
                 eventLocation.isNotEmpty()
             ) {
                 Document(
                     title = title,
                     eventType = eventType,
                     eventStatus = eventStatus,
-                    dateOfReceipt = dateOfReceipt.toDate(),
+                    dateOfReceipt = dateOfReceipt1.toDate(),
                     eventLocation = eventLocation
                 )
             } else {

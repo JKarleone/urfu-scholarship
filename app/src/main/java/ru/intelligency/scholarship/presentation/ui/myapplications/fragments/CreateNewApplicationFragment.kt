@@ -17,6 +17,7 @@ import ru.intelligency.scholarship.domain.myapplications.models.Application
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.extensions.checkField
+import ru.intelligency.scholarship.presentation.extensions.hideKeyboard
 import ru.intelligency.scholarship.presentation.ui.myapplications.adapter.DocumentSelectionAdapter
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModel
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModelFactory
@@ -106,6 +107,8 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
             val specialityName = specialityName.checkField()
             val totalMarksCount = totalMarksCount.checkField()
             val excellentMarksCount = excellentMarksCount.checkField()
+
+            hideKeyboard()
 
             return if (scholarshipType.isNotEmpty() &&
                 fullName.isNotEmpty() &&

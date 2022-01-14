@@ -12,6 +12,7 @@ import ru.intelligency.scholarship.domain.profile.models.Profile
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.extensions.checkField
+import ru.intelligency.scholarship.presentation.extensions.hideKeyboard
 import ru.intelligency.scholarship.presentation.extensions.matchEmail
 import javax.inject.Inject
 
@@ -74,6 +75,8 @@ class ProfileEditFragment : BaseFragment<FragmentProfileEditBinding>() {
         val academicGroupNumber = binding.academicGroupNumber.checkField()
         val email = binding.email.checkField(matches = String::matchEmail)
         val phoneNumber = binding.phoneNumber.checkField()
+
+        hideKeyboard()
 
         return if (fullName.isNotEmpty() &&
             academicGroupNumber.isNotEmpty() &&

@@ -18,6 +18,7 @@ import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
 import ru.intelligency.scholarship.presentation.extensions.checkField
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
+import ru.intelligency.scholarship.presentation.extensions.hideKeyboard
 import ru.intelligency.scholarship.presentation.extensions.toDate
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModel
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModelFactory
@@ -168,6 +169,8 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
                 if (eventStatusExposed == defaultEventStatuses.last()) eventStatusInput else eventStatusExposed
             val dateOfReceipt = documentDateInputLayout.editText?.text.toString().toDate()
             val eventLocation = eventPlaceInputLayout.checkField()
+
+            hideKeyboard()
 
             return if (title.isNotEmpty() &&
                 eventType.isNotEmpty() &&

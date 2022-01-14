@@ -18,6 +18,15 @@ fun String.matchDate(): Boolean {
     }
 }
 
+fun String.matchDateByExpiration(): Boolean {
+    val format = SimpleDateFormat("dd.MM.yyyy")
+    return try {
+        !format.parse(this).time.isExpired()
+    } catch (e: Exception) {
+        false
+    }
+}
+
 fun String.toDate(): Long {
     val format = SimpleDateFormat("dd.MM.yyyy")
     return try {
