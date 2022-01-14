@@ -21,9 +21,10 @@ class ApplicationsViewModel(
     val applications: StateFlow<List<Application>> = applicationsInteractor.getApplications()
         .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
 
-    val documents: StateFlow<List<ApplicationDocument>> = portfolioInteractor.getAllDocuments()
-        .map { list -> list.map { it.toApplicationDocument() } }
-        .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+    val documents: StateFlow<List<ApplicationDocument>> =
+        portfolioInteractor.getAllAcceptedDocuments()
+            .map { list -> list.map { it.toApplicationDocument() } }
+            .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
 
     suspend fun getApplication(applicationId: Int): StateFlow<ApplicationWithDocuments?> {
         return applicationsInteractor.getApplication(applicationId)
