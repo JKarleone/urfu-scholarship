@@ -7,6 +7,7 @@ import ru.intelligency.scholarship.data.myapplications.ApplicationDao
 import ru.intelligency.scholarship.data.myapplications.ApplicationDocumentCrossRefDao
 import ru.intelligency.scholarship.data.myapplications.ApplicationsRepositoryImpl
 import ru.intelligency.scholarship.data.portfolio.DocumentDao
+import ru.intelligency.scholarship.data.portfolio.DocumentsApi
 import ru.intelligency.scholarship.data.portfolio.DocumentsRepositoryImpl
 import ru.intelligency.scholarship.data.portfolio.ImageProvider
 import ru.intelligency.scholarship.data.profile.ProfileRepositoryImpl
@@ -23,9 +24,18 @@ class RepositoryModule {
     @Singleton
     fun provideDocumentsRepository(
         documentDao: DocumentDao,
-        applicationWithDocumentsRefDao: ApplicationDocumentCrossRefDao
+        applicationWithDocumentsRefDao: ApplicationDocumentCrossRefDao,
+        documentsApi: DocumentsApi,
+        userSharedPreferences: UserSharedPreferences,
+        imageProvider: ImageProvider
     ): DocumentsRepository {
-        return DocumentsRepositoryImpl(documentDao, applicationWithDocumentsRefDao)
+        return DocumentsRepositoryImpl(
+            documentDao,
+            applicationWithDocumentsRefDao,
+            documentsApi,
+            userSharedPreferences,
+            imageProvider
+        )
     }
 
     @Provides

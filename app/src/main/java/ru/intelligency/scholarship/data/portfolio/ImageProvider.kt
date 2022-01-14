@@ -24,4 +24,8 @@ class ImageProvider(private val context: Context) {
         val file = File(context.filesDir, fileName)
         return BitmapFactory.decodeFile(file.path)
     }
+
+    fun getImageFile(fileName: String): File {
+        return File(context.filesDir, fileName)
+    }
 }
