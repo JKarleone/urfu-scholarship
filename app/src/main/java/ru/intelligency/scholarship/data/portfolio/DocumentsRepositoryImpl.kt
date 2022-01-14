@@ -4,11 +4,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ru.intelligency.scholarship.data.extensions.toDomainModel
 import ru.intelligency.scholarship.data.extensions.toEntity
+import ru.intelligency.scholarship.data.myapplications.ApplicationDocumentCrossRefDao
 import ru.intelligency.scholarship.domain.portfolio.DocumentsRepository
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 
 class DocumentsRepositoryImpl(
-    private val documentDao: DocumentDao
+    private val documentDao: DocumentDao,
+    private val applicationDocumentCrossRefDao: ApplicationDocumentCrossRefDao
 ) : DocumentsRepository {
 
     override fun getAllDocuments(): Flow<List<Document>> =
@@ -39,6 +41,7 @@ class DocumentsRepositoryImpl(
 
     override suspend fun deleteDocument(documentId: Long) {
         documentDao.deleteDocument(documentId)
+        applicationDocumentCrossRefDao.deleteDocumentWithId(documentId)
     }
 
     companion object {

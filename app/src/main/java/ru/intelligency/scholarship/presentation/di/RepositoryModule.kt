@@ -21,8 +21,11 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideDocumentsRepository(documentDao: DocumentDao): DocumentsRepository {
-        return DocumentsRepositoryImpl(documentDao)
+    fun provideDocumentsRepository(
+        documentDao: DocumentDao,
+        applicationWithDocumentsRefDao: ApplicationDocumentCrossRefDao
+    ): DocumentsRepository {
+        return DocumentsRepositoryImpl(documentDao, applicationWithDocumentsRefDao)
     }
 
     @Provides

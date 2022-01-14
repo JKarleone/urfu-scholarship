@@ -3,6 +3,7 @@
     package="ru.intelligency.scholarship">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".presentation.App"
