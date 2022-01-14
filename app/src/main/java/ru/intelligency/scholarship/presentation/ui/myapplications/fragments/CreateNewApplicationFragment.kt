@@ -16,6 +16,7 @@ import ru.intelligency.scholarship.databinding.FragmentCreateNewApplicationBindi
 import ru.intelligency.scholarship.domain.myapplications.models.Application
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.extensions.checkField
 import ru.intelligency.scholarship.presentation.ui.myapplications.adapter.DocumentSelectionAdapter
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModel
 import ru.intelligency.scholarship.presentation.ui.myapplications.viewmodels.ApplicationsViewModelFactory
@@ -58,21 +59,11 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
 
     private fun bindSaveButtonClick() {
         binding.saveButton.setOnClickListener {
-            lifecycleScope.launch {
-                val newApplication = Application(
-                    scholarshipType = binding.scholarshipType.editText?.text.toString(),
-                    fullName = binding.fullName.editText?.text.toString(),
-                    academicGroupNumber = binding.academicGroupNumber.editText?.text.toString(),
-                    specialityCode = binding.specialityCode.editText?.text.toString(),
-                    specialityName = binding.specialityName.editText?.text.toString(),
-                    totalMarksCount = binding.totalMarksCount.editText?.text.toString().toInt(),
-                    excellentMarksCount = binding.excellentMarksCount.editText?.text.toString()
-                        .toInt(),
-                    applicationStatus = Status.IN_WAITING,
-                    sendingDate = Calendar.getInstance().timeInMillis
-                )
-                viewModel.saveApplication(newApplication, adapter.selectedDocsIds)
-                requireActivity().onBackPressed()
+            tryToGetApplication()?.let { application ->
+                lifecycleScope.launch {
+                    viewModel.saveApplication(application, adapter.selectedDocsIds)
+                    requireActivity().onBackPressed()
+                }
             }
         }
     }
@@ -90,6 +81,41 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
         lifecycleScope.launch {
             viewModel.documents.collect { documents ->
                 adapter.submitData(documents)
+            }
+        }
+    }
+
+    private fun tryToGetApplication(): Application? {
+        with(binding) {
+            val scholarshipType = scholarshipType.checkField()
+            val fullName = fullName.checkField()
+            val academicGroupNumber = academicGroupNumber.checkField()
+            val specialityCode = specialityCode.checkField()
+            val specialityName = specialityName.checkField()
+            val totalMarksCount = totalMarksCount.checkField()
+            val excellentMarksCount = excellentMarksCount.checkField()
+
+            return if (scholarshipType.isNotEmpty() &&
+                fullName.isNotEmpty() &&
+                academicGroupNumber.isNotEmpty() &&
+                specialityCode.isNotEmpty() &&
+                specialityName.isNotEmpty() &&
+                totalMarksCount.isNotEmpty() &&
+                excellentMarksCount.isNotEmpty()
+            ) {
+                Application(
+                    scholarshipType = scholarshipType,
+                    fullName = fullName,
+                    academicGroupNumber = academicGroupNumber,
+                    specialityCode = specialityCode,
+                    specialityName = specialityName,
+                    totalMarksCount = totalMarksCount.toInt(),
+                    excellentMarksCount = excellentMarksCount.toInt(),
+                    applicationStatus = Status.IN_WAITING,
+                    sendingDate = Calendar.getInstance().timeInMillis
+                )
+            } else {
+                null
             }
         }
     }

@@ -22,7 +22,10 @@
     <string name="placeholder_full_name">Иванов Иван Иванович</string>
     <string name="placeholder_academic_group_number">Например, РИ-110012</string>
     <string name="placeholder_speciality_name">Например, Программная инженерия</string>
+    <string name="placeholder_speciality_code">Например, 09.03.04</string>
     <string name="placeholder_phone_number">+7 (9__) ___-__-__</string>
+    <string name="placeholder_full_name_full">Фамилия Имя Отчество</string>
+    <string name="placeholder_academic"></string>
 
     <string name="sign_in">Войти в аккаунт</string>
     <string name="forget_password_text">Забыли пароль?</string>
