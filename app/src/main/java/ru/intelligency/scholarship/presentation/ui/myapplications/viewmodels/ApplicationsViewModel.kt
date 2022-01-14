@@ -10,12 +10,15 @@ import ru.intelligency.scholarship.domain.myapplications.ApplicationsInteractor
 import ru.intelligency.scholarship.domain.myapplications.models.Application
 import ru.intelligency.scholarship.domain.myapplications.models.ApplicationWithDocuments
 import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
+import ru.intelligency.scholarship.domain.profile.ProfileInteractor
+import ru.intelligency.scholarship.domain.profile.models.Profile
 import ru.intelligency.scholarship.presentation.ui.myapplications.adapter.ApplicationDocument
 import ru.intelligency.scholarship.presentation.ui.myapplications.extensions.toApplicationDocument
 
 class ApplicationsViewModel(
     private val applicationsInteractor: ApplicationsInteractor,
-    portfolioInteractor: PortfolioInteractor
+    portfolioInteractor: PortfolioInteractor,
+    profileInteractor: ProfileInteractor
 ) : ViewModel() {
 
     val applications: StateFlow<List<Application>> = applicationsInteractor.getApplications()
@@ -25,6 +28,9 @@ class ApplicationsViewModel(
         portfolioInteractor.getAllAcceptedDocuments()
             .map { list -> list.map { it.toApplicationDocument() } }
             .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+
+    val profile: StateFlow<Profile> = profileInteractor.getProfileFlow()
+        .stateIn(viewModelScope, SharingStarted.Lazily, Profile())
 
     suspend fun getApplication(applicationId: Int): StateFlow<ApplicationWithDocuments?> {
         return applicationsInteractor.getApplication(applicationId)

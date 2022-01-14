@@ -7,7 +7,7 @@ class ProfileInteractor(
     private val profileRepository: ProfileRepository
 ) {
 
-    fun getProfile(): Flow<Profile> {
+    fun getProfileFlow(): Flow<Profile> {
         return profileRepository.getProfile()
     }
 

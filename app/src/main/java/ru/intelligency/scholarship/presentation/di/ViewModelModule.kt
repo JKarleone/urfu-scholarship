@@ -30,9 +30,14 @@ class ViewModelModule {
     @Provides
     fun provideApplicationsViewModelFactory(
         applicationsInteractor: ApplicationsInteractor,
-        portfolioInteractor: PortfolioInteractor
+        portfolioInteractor: PortfolioInteractor,
+        profileInteractor: ProfileInteractor
     ): ApplicationsViewModelFactory {
-        return ApplicationsViewModelFactory(applicationsInteractor, portfolioInteractor)
+        return ApplicationsViewModelFactory(
+            applicationsInteractor,
+            portfolioInteractor,
+            profileInteractor
+        )
     }
 
     @Provides

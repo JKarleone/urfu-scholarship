@@ -12,7 +12,7 @@ class ProfileViewModel(
 ) : ViewModel() {
 
     suspend fun getProfile(): StateFlow<Profile> {
-        return profileInteractor.getProfile()
+        return profileInteractor.getProfileFlow()
             .stateIn(viewModelScope)
     }
 

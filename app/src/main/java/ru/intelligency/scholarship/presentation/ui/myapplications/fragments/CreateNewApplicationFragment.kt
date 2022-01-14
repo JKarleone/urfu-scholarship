@@ -55,6 +55,18 @@ class CreateNewApplicationFragment : BaseFragment<FragmentCreateNewApplicationBi
         bindSaveButtonClick()
         setupToolbar()
         setupRecyclerView()
+        setupDataFromProfile()
+    }
+
+    private fun setupDataFromProfile() {
+        lifecycleScope.launch {
+            viewModel.profile.collect { profile ->
+                with(binding) {
+                    fullName.editText?.setText(profile.fullName)
+                    academicGroupNumber.editText?.setText(profile.academicGroupNumber)
+                }
+            }
+        }
     }
 
     private fun bindSaveButtonClick() {
