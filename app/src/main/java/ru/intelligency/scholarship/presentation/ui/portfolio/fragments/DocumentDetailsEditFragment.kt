@@ -16,6 +16,7 @@ import ru.intelligency.scholarship.domain.portfolio.PortfolioInteractor
 import ru.intelligency.scholarship.domain.portfolio.model.Document
 import ru.intelligency.scholarship.presentation.App
 import ru.intelligency.scholarship.presentation.base.BaseFragment
+import ru.intelligency.scholarship.presentation.extensions.checkField
 import ru.intelligency.scholarship.presentation.extensions.getStringDate
 import ru.intelligency.scholarship.presentation.extensions.toDate
 import ru.intelligency.scholarship.presentation.ui.portfolio.viewmodels.DocumentDetailsEditViewModel
@@ -33,6 +34,8 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
     }
     private val defaultEventTypes by lazy { viewModel.getDefaultEventTypes() }
     private val defaultEventStatuses by lazy { viewModel.getDefaultEventStatuses() }
+
+    private var fileName: String? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_document_details_edit
@@ -54,7 +57,12 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
                 }
             }
             saveButton.setOnClickListener {
-                saveDocument()
+                tryToGetDocument()?.let { document ->
+                    lifecycleScope.launch {
+                        viewModel.updateDocument(document)
+                        requireActivity().onBackPressed()
+                    }
+                }
             }
             deleteButton.setOnClickListener {
                 deleteDocument()
@@ -106,6 +114,7 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
         lifecycleScope.launch {
             viewModel.document.collect { document ->
                 document?.let {
+                    fileName = document.fileName
                     with(binding) {
                         documentNameInputLayout.editText?.setText(document.title)
                         documentDateInputLayout.editText?.setText(document.dateOfReceipt.getStringDate())
@@ -146,28 +155,37 @@ class DocumentDetailsEditFragment : BaseFragment<FragmentDocumentDetailsEditBind
         }
     }
 
-    private fun saveDocument() {
-        val title = binding.documentNameInputLayout.editText?.text.toString()
-        val eventTypeExposed = binding.eventTypeInputLayoutExposed.editText?.text.toString()
-        val eventTypeInput = binding.eventTypeInputLayout.editText?.text.toString()
-        val eventType =
-            if (eventTypeExposed == defaultEventTypes.last()) eventTypeInput else eventTypeExposed
-        val eventStatusExposed = binding.eventStatusInputLayoutExposed.editText?.text.toString()
-        val eventStatusInput = binding.eventStatusInputLayout.editText?.text.toString()
-        val eventStatus =
-            if (eventStatusExposed == defaultEventStatuses.last()) eventStatusInput else eventStatusExposed
-        val dateOfReceipt = binding.documentDateInputLayout.editText?.text.toString().toDate()
-        val newDoc = Document(
-            id = args.documentId,
-            title = title,
-            eventType = eventType,
-            eventStatus = eventStatus,
-            dateOfReceipt = dateOfReceipt,
-            eventLocation = binding.eventPlaceInputLayout.editText?.text.toString()
-        )
-        lifecycleScope.launch {
-            viewModel.updateDocument(newDoc)
-            requireActivity().onBackPressed()
+    private fun tryToGetDocument(): Document? {
+        with(binding) {
+            val title = documentNameInputLayout.checkField()
+            val eventTypeExposed = eventTypeInputLayoutExposed.checkField()
+            val eventTypeInput = eventTypeInputLayout.checkField()
+            val eventType =
+                if (eventTypeExposed == defaultEventTypes.last()) eventTypeInput else eventTypeExposed
+            val eventStatusExposed = eventStatusInputLayoutExposed.checkField()
+            val eventStatusInput = eventStatusInputLayout.checkField()
+            val eventStatus =
+                if (eventStatusExposed == defaultEventStatuses.last()) eventStatusInput else eventStatusExposed
+            val dateOfReceipt = documentDateInputLayout.editText?.text.toString().toDate()
+            val eventLocation = eventPlaceInputLayout.checkField()
+
+            return if (title.isNotEmpty() &&
+                eventType.isNotEmpty() &&
+                eventStatus.isNotEmpty() &&
+                eventLocation.isNotEmpty()
+            ) {
+                Document(
+                    id = args.documentId,
+                    title = title,
+                    eventType = eventType,
+                    eventStatus = eventStatus,
+                    dateOfReceipt = dateOfReceipt,
+                    eventLocation = eventLocation,
+                    fileName = fileName ?: ""
+                )
+            } else {
+                null
+            }
         }
     }
 
