@@ -35,6 +35,7 @@ class ScanResultFragment : BaseFragment<FragmentScanResultBinding>() {
                 title.setText(R.string.document_add_doc)
                 optionsButton.visibility = View.INVISIBLE
                 backButton.setOnClickListener {
+                    viewModel.image = null
                     requireActivity().onBackPressed()
                 }
             }

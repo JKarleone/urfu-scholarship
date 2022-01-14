@@ -36,7 +36,11 @@ class ScanDocumentFragment : BaseFragment<FragmentScanDocumentBinding>() {
                 image?.let { img ->
                     viewModel.image = img
                     binding.documentScanner.setImage(img)
+                } ?: run {
+                    requireActivity().onBackPressed()
                 }
+            } else {
+                requireActivity().onBackPressed()
             }
         }
     private val permissionResult = registerForActivityResult(
