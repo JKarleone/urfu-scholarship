@@ -30,6 +30,10 @@ class ApplicationsViewModel(
             .stateIn(viewModelScope)
     }
 
+    suspend fun updateApplicationStatuses() {
+        applicationsInteractor.updateApplicationsStatuses()
+    }
+
     suspend fun saveApplication(application: Application, documentIds: List<Int>) {
         applicationsInteractor.saveApplication(application, documentIds)
     }

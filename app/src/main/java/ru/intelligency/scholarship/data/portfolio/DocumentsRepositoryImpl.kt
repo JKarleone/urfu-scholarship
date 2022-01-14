@@ -43,7 +43,7 @@ class DocumentsRepositoryImpl(
             documentDao.getAllDocuments().forEach { documentEntity ->
                 allIds?.let { ids ->
                     if (documentEntity.documentId !in ids) {
-                        documentDao.deleteDocument(documentEntity.documentId)
+                        deleteLocalDocument(documentEntity.documentId)
                     }
                 }
             }
@@ -79,9 +79,13 @@ class DocumentsRepositoryImpl(
     }
 
     override suspend fun deleteDocument(documentId: Int) {
+        deleteLocalDocument(documentId)
+        documentsApi.deleteDocument(documentId)
+    }
+
+    private suspend fun deleteLocalDocument(documentId: Int) {
         documentDao.deleteDocument(documentId)
         applicationDocumentCrossRefDao.deleteDocumentWithId(documentId)
-        documentsApi.deleteDocument(documentId)
     }
 
     companion object {

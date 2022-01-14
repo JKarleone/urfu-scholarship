@@ -11,10 +11,16 @@ import kotlinx.coroutines.flow.Flow
 interface ApplicationDao {
 
     @Query("SELECT * FROM applications")
-    fun getAllApplications(): Flow<List<ApplicationEntity>>
+    fun getAllApplicationsFlow(): Flow<List<ApplicationEntity>>
+
+    @Query("SELECT * FROM applications")
+    suspend fun getAllApplications(): List<ApplicationEntity>
 
     @Query("SELECT * FROM applications WHERE applicationId == :applicationId")
-    fun getApplicationById(applicationId: Int): Flow<ApplicationWithDocumentsEntity?>
+    fun getApplicationFlowById(applicationId: Int): Flow<ApplicationWithDocumentsEntity?>
+
+    @Query("SELECT * FROM applications WHERE applicationId == :applicationId")
+    suspend fun getApplicationById(applicationId: Int): ApplicationEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createApplication(application: ApplicationEntity): Long

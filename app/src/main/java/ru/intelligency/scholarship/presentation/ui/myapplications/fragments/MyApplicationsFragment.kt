@@ -44,6 +44,13 @@ class MyApplicationsFragment : BaseFragment<FragmentMyApplicationsBinding>(),
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            viewModel.updateApplicationStatuses()
+        }
+    }
+
     private fun observeApplications() {
         lifecycleScope.launch {
             viewModel.applications.collect { applications ->

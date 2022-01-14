@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.map
 import ru.intelligency.scholarship.data.extensions.toCreateRequestModel
 import ru.intelligency.scholarship.data.extensions.toDomainModel
 import ru.intelligency.scholarship.data.extensions.toEntity
+import ru.intelligency.scholarship.data.extensions.toStatus
 import ru.intelligency.scholarship.data.profile.UserSharedPreferences
 import ru.intelligency.scholarship.domain.myapplications.ApplicationsRepository
 import ru.intelligency.scholarship.domain.myapplications.models.Application
@@ -18,14 +19,35 @@ class ApplicationsRepositoryImpl(
 ) : ApplicationsRepository {
 
     override fun getApplications(): Flow<List<Application>> {
-        return applicationDao.getAllApplications()
+        return applicationDao.getAllApplicationsFlow()
             .map { list ->
                 list.map { applicationEntity -> applicationEntity.toDomainModel() }
             }
     }
 
+    override suspend fun updateApplicationsStatuses() {
+        val response = applicationsApi.getApplicationsStatuses()
+        if (response.isSuccessful) {
+            response.body()?.forEach { (id, status) ->
+                applicationDao.getApplicationById(id)?.let { application ->
+                    val statusEnum = status.toStatus()
+                    val appWithNewStatus = application.copy(applicationStatus = statusEnum)
+                    applicationDao.updateApplication(appWithNewStatus)
+                }
+            }
+            val allIds = response.body()?.map { it.applicationId }
+            applicationDao.getAllApplications().forEach { applicationEntity ->
+                allIds?.let { ids ->
+                    if (applicationEntity.applicationId !in ids) {
+                        deleteApplication(applicationEntity.applicationId)
+                    }
+                }
+            }
+        }
+    }
+
     override fun getApplicationById(applicationId: Int): Flow<ApplicationWithDocuments?> {
-        return applicationDao.getApplicationById(applicationId).map { it?.toDomainModel() }
+        return applicationDao.getApplicationFlowById(applicationId).map { it?.toDomainModel() }
     }
 
     override suspend fun createApplication(application: Application, documentIds: List<Int>) {

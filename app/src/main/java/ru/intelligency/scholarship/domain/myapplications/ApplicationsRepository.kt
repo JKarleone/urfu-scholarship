@@ -8,6 +8,8 @@ interface ApplicationsRepository {
 
     fun getApplications(): Flow<List<Application>>
 
+    suspend fun updateApplicationsStatuses()
+
     fun getApplicationById(applicationId: Int): Flow<ApplicationWithDocuments?>
 
     suspend fun createApplication(application: Application, documentIds: List<Int>)

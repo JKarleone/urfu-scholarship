@@ -12,6 +12,10 @@ class ApplicationsInteractor(
         return repository.getApplications()
     }
 
+    suspend fun updateApplicationsStatuses() {
+        repository.updateApplicationsStatuses()
+    }
+
     fun getApplication(applicationId: Int): Flow<ApplicationWithDocuments?> {
         return repository.getApplicationById(applicationId)
     }
