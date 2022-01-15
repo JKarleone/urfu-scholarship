@@ -63,13 +63,19 @@ class DocumentsRepositoryImpl(
     }
 
     override suspend fun createDocument(document: Document) {
-        documentDao.insertDocument(document.toEntity())
         val fullName = userSharedPreferences.getUserData().fullName
         val file = imageProvider.getImageFile(document.fileName)
         val requestFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("img", file.name, requestFile)
-        documentsApi.postDocument(document.toCreateRequestModel(fullName))
-        documentsApi.postDocumentImage(body)
+
+        val response = documentsApi.postDocument(document.toCreateRequestModel(fullName))
+        if (response.isSuccessful) {
+            documentsApi.postDocumentImage(body)
+            response.body()?.let { respBody ->
+                val docId = respBody.id
+                documentDao.insertDocument(document.toEntity().copy(documentId = docId))
+            }
+        }
     }
 
     override suspend fun updateDocument(document: Document) {

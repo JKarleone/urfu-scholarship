@@ -17,7 +17,7 @@ interface DocumentsApi {
     suspend fun getDocumentsStatuses(): Response<List<DocumentStatusResponseModel>>
 
     @POST("/api/sert/add")
-    suspend fun postDocument(@Body document: CreateDocumentRequestModel)
+    suspend fun postDocument(@Body document: CreateDocumentRequestModel): Response<PostDocumentRequestBody>
 
     @PUT("/api/sert/update/{id}")
     suspend fun putDocument(

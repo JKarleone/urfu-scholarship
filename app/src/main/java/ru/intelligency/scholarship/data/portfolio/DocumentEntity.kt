@@ -7,7 +7,7 @@ import ru.intelligency.scholarship.presentation.utils.Status
 
 @Entity(tableName = "documents")
 data class DocumentEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val documentId: Int = 0,
     @ColumnInfo(name = "title")
     val title: String,
