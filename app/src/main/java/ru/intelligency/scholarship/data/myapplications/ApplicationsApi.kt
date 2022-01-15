@@ -10,7 +10,7 @@ import retrofit2.http.Path
 interface ApplicationsApi {
 
     @POST("/api/application/add")
-    suspend fun postApplication(@Body application: CreateApplicationRequestModel)
+    suspend fun postApplication(@Body application: CreateApplicationRequestModel): Response<PostApplicationRequestBody>
 
     @GET("/api/application/getStatus")
     suspend fun getApplicationsStatuses(): Response<List<ApplicationStatusResponseModel>>

@@ -23,7 +23,7 @@ interface ApplicationDao {
     suspend fun getApplicationById(applicationId: Int): ApplicationEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun createApplication(application: ApplicationEntity): Long
+    suspend fun createApplication(application: ApplicationEntity)
 
     @Update
     suspend fun updateApplication(applicationEntity: ApplicationEntity)

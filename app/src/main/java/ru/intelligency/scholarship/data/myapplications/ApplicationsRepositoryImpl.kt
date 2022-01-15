@@ -51,15 +51,26 @@ class ApplicationsRepositoryImpl(
     }
 
     override suspend fun createApplication(application: Application, documentIds: List<Int>) {
-        val applicationId = applicationDao.createApplication(application.toEntity())
-        documentIds.forEach { documentId ->
-            applicationWithDocumentsDao.insertApplicationDocumentCrossRef(
-                ApplicationDocumentCrossRef(applicationId.toInt(), documentId)
-            )
-        }
-        applicationsApi.postApplication(
+//        val applicationId = applicationDao.createApplication(application.toEntity())
+//        documentIds.forEach { documentId ->
+//            applicationWithDocumentsDao.insertApplicationDocumentCrossRef(
+//                ApplicationDocumentCrossRef(applicationId.toInt(), documentId)
+//            )
+//        }
+        val response = applicationsApi.postApplication(
             application.toCreateRequestModel(documentIds, userSharedPreferences.getUserData().id)
         )
+        if (response.isSuccessful) {
+            response.body()?.let { body ->
+                val appId = body.id
+                applicationDao.createApplication(application.toEntity().copy(applicationId = appId))
+                documentIds.forEach { documentId ->
+                    applicationWithDocumentsDao.insertApplicationDocumentCrossRef(
+                        ApplicationDocumentCrossRef(appId, documentId)
+                    )
+                }
+            }
+        }
     }
 
     override suspend fun updateApplication(application: Application) {
